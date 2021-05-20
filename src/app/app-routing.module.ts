@@ -9,7 +9,7 @@ import { ValidarAdminGuard } from './guard/validar-admin.guard';
 const routes: Routes = [
   { path: "", redirectTo: "bienvenido", pathMatch: "full" },
   { path: "bienvenido", component: BienvenidaComponent },
-  { path: "admin/seccion-usuarios", component: SeccionUsuariosComponent, /*canActivate: [ValidarAdminGuard]*/},
+  { path: "admin/seccion-usuarios", component: SeccionUsuariosComponent, canActivate: [ValidarAdminGuard]},
   { path: "error404", component: Error404Component },
   { path: "**", component: Error404Component },
 ];

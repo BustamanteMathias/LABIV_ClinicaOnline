@@ -220,9 +220,6 @@ export class RegisterComponent implements OnInit {
         console.log('Captcha indefinido');
         break;
     }
-
-    console.log()
-    console.log("Num: " + this.captchaRandom + " captcha: " + captcha);
     return this.errorCaptcha;
   }
 
@@ -279,31 +276,11 @@ export class RegisterComponent implements OnInit {
         });
 
         this.Register(profesional.correo, pass, profesional);
-        this.router.navigate(['']);
       } else {
         this.form2.markAllAsTouched();
         //this.toastr.warning('TEXTO 1!', 'TEXTO 2');
       }
     }
-  }
-
-  RegistrarAdmin(event: Event) {
-    event.preventDefault();
-    let admin: Admin = new Admin();
-    admin.id = 'TEST';
-    admin.nombre = 'Mathias ADMIN';
-    admin.apellido = 'Bustamante';
-    admin.correo = 'admin@example.com';
-    admin.dni = 9999999;
-    admin.edad = 99;
-    admin.estado = 'ALTA';
-    admin.foto1 = '';
-    admin.tipo = 'ADMIN';
-
-    let pass = '123456';
-
-    this.Register(admin.correo, pass, admin);
-    this.router.navigate(['']);
   }
 
   SetProfesion(profesion: string) {

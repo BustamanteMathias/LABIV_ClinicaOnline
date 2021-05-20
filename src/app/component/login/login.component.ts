@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   hCuenta: string = '';
   hPass: string = '';
 
-  cRecordar: boolean = true;
+  cRecordar: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,

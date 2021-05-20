@@ -10,16 +10,9 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
 import { FirebaseService } from "./service/firebase.service";
-const firebaseConfig = {
-  apiKey: "AIzaSyCwG7LBWZE8Qguwoyb8gjunB5nO-h6iCg4",
-  authDomain: "clinicaonline2021-d1bf2.firebaseapp.com",
-  projectId: "clinicaonline2021-d1bf2",
-  storageBucket: "clinicaonline2021-d1bf2.appspot.com",
-  messagingSenderId: "369033099727",
-  appId: "1:369033099727:web:7808c828e07ee88c157aba"
-};
+import { environment } from "../environments/environment";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,7 +59,7 @@ import { SprinnerComponent } from './component/sprinner/sprinner.component';
       preventDuplicates: true,
     }), // ToastrModule added
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireStorageModule
   ],

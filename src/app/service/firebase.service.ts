@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class FirebaseService {
 
   constructor(
     private AFauth: AngularFireAuth,
-    private context: AngularFireDatabase
+    private context: AngularFireDatabase,
+    private router: Router,
   ) {
     // Inicializar
     this.FirebaseGetAllData();
@@ -86,6 +88,7 @@ export class FirebaseService {
       this.AFauth.createUserWithEmailAndPassword(email, password).then(
         (response: any) => {
           this.EnviarMailDeVerificacion();
+          this.router.navigate(['']);
           resolve(response);
         },
         (error: any) => {

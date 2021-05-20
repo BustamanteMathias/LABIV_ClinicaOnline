@@ -10,6 +10,10 @@ export class SeccionUsuariosComponent implements OnInit {
 
   listaProfesionalesPendientes:any[]=[];
   listaProfesionalesAlta:any[]=[];
+
+  listaProfesionales:any[];
+  listaPacientes:any[];
+
   selectNavBar:string = 'INICIO';
 
   spinner:boolean = false;
@@ -25,6 +29,9 @@ export class SeccionUsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.listaProfesionalesPendientes = this.firebase.GetProfesionales().filter(profesional => profesional.estado == 'PENDIENTE');
     this.listaProfesionalesAlta = this.firebase.GetProfesionales().filter(profesional => profesional.estado == 'ALTA');
+
+    this.listaPacientes = this.firebase.GetPacientes();
+    this.listaProfesionales = this.firebase.GetProfesionales();
   }
 
   GetSelect($event){

@@ -1,1 +1,61 @@
-<p>inicio-admin works!</p>
+<div class="row">
+  <div class="col">
+
+    <div style="text-align: center;">
+      <br> <h2>LISTADO DE PACIENTES</h2> <br>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of this.listaPacientes; let i=index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.nombre}}</td>
+          <td>{{item.apellido}}</td>
+          <td>{{item.tipo}}</td>
+          <td><span class="badge bg-success">{{item.estado}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col">
+
+    <div style="text-align: center;">
+      <br> <h2>LISTADO DE PROFESIONALES</h2> <br>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of this.listaProfesionales; let i=index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.nombre}}</td>
+          <td>{{item.apellido}}</td>
+          <td>{{item.tipo}}</td>
+          <td *ngIf="item.estado == 'ALTA'"><span class="badge bg-success">{{item.estado}}</span></td>
+          <td *ngIf="item.estado == 'PENDIENTE'"><span class="badge bg-warning">{{item.estado}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
