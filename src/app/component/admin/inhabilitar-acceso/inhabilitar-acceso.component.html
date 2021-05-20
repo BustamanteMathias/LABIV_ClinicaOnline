@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">DNI</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Estado</th>
+      <th scope="col">ACCESO</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let item of this.listaProfesionales; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{item.nombre}}</td>
+      <td>{{item.apellido}}</td>
+      <td>{{item.dni}}</td>
+      <td>{{item.tipo}}</td>
+      <td><span class="badge bg-success">{{item.estado}}</span></td>
+      <td><button type="button" class="btn btn-danger">Inhabilitar Acceso</button></td>
+    </tr>
+  </tbody>
+</table>

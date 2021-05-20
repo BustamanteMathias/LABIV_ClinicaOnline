@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "clinicaonline2021-d1bf2": {
+      "hosting": {
+        "ClinicaOnline2021": [
+          "clinicaonline2021-d1bf2"
+        ]
+      }
+    }
+  }
+}

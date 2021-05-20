@@ -1,0 +1,387 @@
+<div class="container">
+
+  <ng-container *ngIf="this.tipo == 'PACIENTE'; else elseTemplate">
+    <div class="text-center contenedorLogin">
+      <img class="mb-4" src="https://image.flaticon.com/icons/png/512/1533/1533790.png" alt="" width="100" height="100">
+      <h1 class="h3 mb-3 fw-normal">{{this.tipo}}</h1>
+      <button type="button" class="btn btn-warning" (click)="CambiarTipoRegistro()">REGISTRARSE COMO <strong>{{this.btnCanbiarRegistro}}</strong></button>
+      <br>
+      <br>
+    </div>
+
+    <form [formGroup]="form" novalidate>
+      <div class="row">
+        <div class="col">
+          <form class="text-center contenedorLogin">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingInput1" formControlName="nombre">
+              <label for="floatingInput1">Nombre</label>
+
+              <div class="error" *ngIf="form.get('nombre').errors && form.get('nombre').touched">
+                <p *ngIf="form.get('nombre').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form.get('nombre').hasError('maxlength')">
+                  El nombre debe ser máximo de 35 caracteres. <br>
+                </p>
+                <p *ngIf="form.get('nombre').hasError('minlength')">
+                  El nombre debe ser minimo de 1 caracter. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInput2" formControlName="correo">
+              <label for="floatingInput2">Correo</label>
+
+              <div class="error" *ngIf="form.get('correo').errors && form.get('correo').touched">
+                <p *ngIf="form.get('correo').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form.get('correo').hasError('email')">
+                  Correo no valido. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-floating">
+              <input type="number" class="form-control" id="floatingPassword" formControlName="dni">
+              <label for="floatingPassword">DNI</label>
+
+              <div class="error" *ngIf="form.get('dni').errors && form.get('dni').touched">
+                <p *ngIf="form.get('dni').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form.get('dni').hasError('max')">
+                  El DNI debe ser máximo de 99.999.999. <br>
+                </p>
+                <p *ngIf="form.get('dni').hasError('min')">
+                  eL dni debe ser minimo de 1.000.000. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+
+            <label for="select">Seleccione su OBRA SOCIAL</label>
+            <select class="form-control" id="select" formControlName="obraSocial">
+              <option value="NINGUNA" selected>NINGUNA</option>
+              <option value="GALENO" selected>GALENO</option>
+              <option value="SWISSMEDICAL">SWISS MEDICAL</option>
+              <option value="OSDE">OSDE</option>
+              <option value="MEDICUS">MEDICUS</option>
+              <option value="OTRO">OTRO</option>
+            </select>
+            <div class="error" *ngIf="form.get('obraSocial').errors && form.get('obraSocial').touched">
+              <p *ngIf="form.get('obraSocial').hasError('required')">
+                Es un campo requerido. <br>
+              </p>
+            </div>
+            <br>
+
+            <label for="selectFiles">Seleccione 2 imagenes para PERFIL</label>
+            <input type="file" id="selectFiles" class="btn btn-dark" (change)="GetFoto($event)" name="archivossubidos[]" accept="image/png, image/jpeg" multiple>
+            <br>
+            <br>
+
+          </form>
+        </div>
+
+        <div class="col">
+          <div class="text-center contenedorLogin">
+            <div>
+              <form>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="floatingInput4" formControlName="apellido">
+                  <label for="floatingInput4">Apellido</label>
+
+                  <div class="error" *ngIf="form.get('apellido').errors && form.get('apellido').touched">
+                    <p *ngIf="form.get('apellido').hasError('required')">
+                      Es un campo requerido. <br>
+                    </p>
+                    <p *ngIf="form.get('apellido').hasError('maxlength')">
+                      El apellido debe ser máximo de 35 caracteres. <br>
+                    </p>
+                    <p *ngIf="form.get('apellido').hasError('minlength')">
+                      El apellido debe ser minimo de 1 caracter. <br>
+                    </p>
+                  </div>
+                </div>
+                <br>
+
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingInput5" formControlName="password">
+                  <label for="floatingInput5">Contraseña</label>
+
+                  <div class="error" *ngIf="form.get('password').errors && form.get('password').touched">
+                    <p *ngIf="form.get('password').hasError('required')">
+                      Es un campo requerido. <br>
+                    </p>
+                    <p *ngIf="form.get('password').hasError('maxlength')">
+                      La contraseña debe ser máximo de 20 caracteres. <br>
+                    </p>
+                    <p *ngIf="form.get('password').hasError('minlength')">
+                      La contraseña debe ser minimo de 6 caracteres. <br>
+                    </p>
+                  </div>
+                </div>
+                <br>
+
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="floatingInput6" formControlName="edad">
+                  <label for="floatingInput6">Edad</label>
+
+                  <div class="error" *ngIf="form.get('edad').errors && form.get('edad').touched">
+                    <p *ngIf="form.get('edad').hasError('required')">
+                      Es un campo requerido. <br>
+                    </p>
+                    <p *ngIf="form.get('edad').hasError('max')">
+                      La edad debe ser máximo de 99 años. <br>
+                    </p>
+                    <p *ngIf="form.get('edad').hasError('min')">
+                      La edad debe ser minimo de 18 años. <br>
+                    </p>
+                  </div>
+                </div>
+
+                <div *ngIf="this.errorCuenta">
+                  <br>
+                  <div class="alert alert-danger" role="alert">
+                    <a href="#" class="alert-link">ERROR</a>. Verifique datos o <a href="#"
+                      class="alert-link">registresé</a> si no poseé una cuenta.
+                  </div>
+                </div>
+                <br>
+
+                <div class="alert alert-warning" role="alert">
+                  <a class="alert-link" style="cursor: pointer;" (click)="RecargarCaptcha()">Recargar Captcha</a> <br><br>
+                  <img src={{this.captchas[this.captchaRandom]}} alt="">
+                  <br><br>
+                  <label for="floatingcaptcha1">INGRESE CAPTCHA</label>
+                  <div class="form-floating d-flex justify-content-center">
+                    <input type="text" class="form-control" id="floatingcaptcha2" formControlName="captcha"
+                      style="width: 25%;">
+
+                    <div class="error" *ngIf="form.get('captcha').errors && form.get('captcha').touched">
+                      <p *ngIf="form.get('captcha').hasError('required')">
+                        Es un campo requerido. <br>
+                      </p>
+                    </div>
+                    <p class="error" *ngIf="this.errorCaptcha">
+                      Captcha incorrecto. <br>
+                    </p>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-success" type="submit" (click)="RegistrarPaciente($event)">Registrar <strong>PACIENTE</strong></button>
+    </form>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="text-center contenedorLogin">
+      <img class="mb-4" src="https://image.flaticon.com/icons/png/512/194/194915.png" alt="" width="100" height="100">
+      <h1 class="h3 mb-3 fw-normal">{{this.tipo}}</h1>
+      <button type="button" class="btn btn-warning" (click)="CambiarTipoRegistro()">REGISTRARSE COMO <strong>{{this.btnCanbiarRegistro}}</strong></button>
+      <br>
+      <span *ngFor="let item of this._pProfesiones">
+        <span class="badge bg-info">{{item}}</span>
+      </span>
+      <br>
+    </div>
+
+
+    <form [formGroup]="form2" novalidate>
+      <div class="row">
+        <div class="col">
+          <form class="text-center contenedorLogin">
+
+
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingInput8" formControlName="nombre">
+              <label for="floatingInput8">Nombre</label>
+
+              <div class="error" *ngIf="form2.get('nombre').errors && form2.get('nombre').touched">
+                <p *ngIf="form2.get('nombre').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form2.get('nombre').hasError('maxlength')">
+                  El nombre debe ser máximo de 35 caracteres. <br>
+                </p>
+                <p *ngIf="form2.get('nombre').hasError('minlength')">
+                  El nombre debe ser minimo de 1 caracter. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInput9" formControlName="correo">
+              <label for="floatingInput9">Correo</label>
+
+              <div class="error" *ngIf="form2.get('correo').errors && form2.get('correo').touched">
+                <p *ngIf="form2.get('correo').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form2.get('correo').hasError('email')">
+                  Correo no valido. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-floating">
+              <input type="number" class="form-control" id="floatingInput10" formControlName="dni">
+              <label for="floatingInput10">DNI</label>
+
+              <div class="error" *ngIf="form2.get('dni').errors && form2.get('dni').touched">
+                <p *ngIf="form2.get('dni').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form2.get('dni').hasError('max')">
+                  El DNI debe ser máximo de 99.999.999. <br>
+                </p>
+                <p *ngIf="form2.get('dni').hasError('min')">
+                  eL dni debe ser minimo de 1.000.000. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+
+
+            <label for="select">Selección de Profesiones</label>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <input type="text" class="form-control" id="floatingPassword" placeholder="Ingrese Nueva Profesión" formControlName="nuevaProfesion">
+                </div>
+                <div class="col">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="SetProfesion(this.form2.value.nuevaProfesion)">Agregar Profesión</button>
+                </div>
+              </div>
+            </div>
+            <div class="error" *ngIf="form2.get('nuevaProfesion').errors">
+              <p *ngIf="form2.get('nuevaProfesion').hasError('minlength')">
+                La profesion debe ser minimo de 3 caracteres. <br>
+              </p>
+            </div>
+            <br>
+            <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group me-2 btn-group-sm" role="group" aria-label="First group">
+                <div *ngFor="let p of this.listaProfesiones">
+                  <button type="button" class="btn btn-outline-secondary" (click)="SetProfesion(p)">{{p}}</button>
+                </div>
+              </div>
+            </div>
+
+            <label for="selectFiles">Seleccione imagen para PERFIL</label>
+            <input type="file" id="selectFiles" class="btn btn-dark" (change)="GetFoto($event)" name="archivossubidos[]" accept="image/png, image/jpeg">
+            <br>
+            <br>
+
+          </form>
+        </div>
+
+        <div class="col">
+          <div class="text-center contenedorLogin">
+            <div>
+              <form>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="floatingInput13" formControlName="apellido">
+                  <label for="floatingInput13">Apellido</label>
+
+                  <div class="error" *ngIf="form2.get('apellido').errors && form2.get('apellido').touched">
+                    <p *ngIf="form2.get('apellido').hasError('required')">
+                      Es un campo requerido. <br>
+                    </p>
+                    <p *ngIf="form2.get('apellido').hasError('maxlength')">
+                      El apellido debe ser máximo de 35 caracteres. <br>
+                    </p>
+                    <p *ngIf="form2.get('apellido').hasError('minlength')">
+                      El apellido debe ser minimo de 1 caracter. <br>
+                    </p>
+                  </div>
+                </div>
+                <br>
+
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingInput14" formControlName="password">
+                  <label for="floatingInput14">Contraseña</label>
+
+                  <div class="error" *ngIf="form2.get('password').errors && form2.get('password').touched">
+                    <p *ngIf="form2.get('password').hasError('required')">
+                      Es un campo requerido. <br>
+                    </p>
+                    <p *ngIf="form2.get('password').hasError('maxlength')">
+                      La contraseña debe ser máximo de 20 caracteres. <br>
+                    </p>
+                    <p *ngIf="form2.get('password').hasError('minlength')">
+                      La contraseña debe ser minimo de 6 caracteres. <br>
+                    </p>
+                  </div>
+                </div>
+                <br>
+
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="floatingInput15" formControlName="edad">
+                  <label for="floatingInput15">Edad</label>
+
+                  <div class="error" *ngIf="form2.get('edad').errors && form2.get('edad').touched">
+                    <p *ngIf="form2.get('edad').hasError('required')">
+                      Es un campo requerido. <br>
+                    </p>
+                    <p *ngIf="form2.get('edad').hasError('max')">
+                      La edad debe ser máximo de 99 años. <br>
+                    </p>
+                    <p *ngIf="form2.get('edad').hasError('min')">
+                      La edad debe ser minimo de 18 años. <br>
+                    </p>
+                  </div>
+                </div>
+
+                <div *ngIf="this.errorCuenta">
+                  <br>
+                  <div class="alert alert-danger" role="alert">
+                    <a href="#" class="alert-link">ERROR</a>. Verifique datos o <a href="#"
+                      class="alert-link">registresé</a> si no poseé una cuenta.
+                  </div>
+                </div>
+                <br>
+
+                <div class="alert alert-warning" role="alert">
+                  <a class="alert-link" style="cursor: pointer;" (click)="RecargarCaptcha()">Recargar Captcha</a> <br><br>
+                  <img src={{this.captchas[this.captchaRandom]}} alt="">
+                  <br><br>
+                  <label for="floatingcaptcha2">INGRESE CAPTCHA</label>
+                  <div class="form-floating d-flex justify-content-center">
+                    <input type="text" class="form-control" id="floatingcaptcha2" formControlName="captcha"
+                      style="width: 25%;">
+
+                    <div class="error" *ngIf="form2.get('captcha').errors && form2.get('captcha').touched">
+                      <p *ngIf="form2.get('captcha').hasError('required')">
+                        Es un campo requerido. <br>
+                      </p>
+                    </div>
+                    <p class="error" *ngIf="this.errorCaptcha">
+                      Captcha incorrecto. <br>
+                    </p>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-success" type="submit" (click)="RegistrarProfesional($event)">Registrar <strong>PROFESIONAL</strong></button>
+    </form>
+  </ng-template>
+
+
+</div>

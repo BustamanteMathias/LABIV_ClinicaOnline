@@ -1,0 +1,46 @@
+<ng-container *ngIf="this.spinner; else elseTemplate">
+  <app-sprinner></app-sprinner>
+</ng-container>
+<ng-template #elseTemplate>
+  <app-nav-bar (SelectNavBar)='GetSelect($event)'></app-nav-bar>
+
+
+<div>
+
+  <div [ngSwitch]="this.selectNavBar">
+    <div *ngSwitchCase="'HABILITAR'">
+      <!-- HABILITAR ACCESOS A PROFESIONALES -->
+      <br><br>
+      <app-habilitar-acceso [listaProfesionales] = 'this.listaProfesionalesPendientes'></app-habilitar-acceso>
+
+    </div>
+    <div *ngSwitchCase="'INHABILITAR'">
+      <!-- INHABILITAR ACCESOS A PROFESIONALES -->
+      <br><br>
+      <app-inhabilitar-acceso [listaProfesionales] = 'this.listaProfesionalesAlta'></app-inhabilitar-acceso>
+
+    </div>
+    <div *ngSwitchCase="'ALTA'">
+      <!-- ALTAS DE USUARUIS -->
+      <div class="altaPacienteProfesional">
+        <br>
+        <div class="row">
+          <div class="col">
+            <app-register></app-register>
+          </div>
+          <div class="col">
+            <app-registro-admin></app-registro-admin>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div *ngSwitchDefault>
+      <!-- INICIO -->
+      <br><br>
+      <app-inicio-admin></app-inicio-admin>
+    </div>
+  </div>
+</div>
+
+</ng-template>

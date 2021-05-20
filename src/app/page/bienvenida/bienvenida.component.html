@@ -1,0 +1,22 @@
+<div class="sidenav">
+  <div class="login-main-text">
+    <h1>CLÍNICA ONLINE</h1> <br><br>
+     <h2>¡Bienvenidos!</h2>
+     <p>Ingresar o registrarse para tener acceso.</p>
+  </div>
+</div>
+<div class="main">
+
+  <ng-container *ngIf="this.swap; else elseTemplate">
+    <app-login></app-login>
+    <br>
+    <p (click)="Swap()" style="color: cornflowerblue; cursor: pointer; text-align: center;">Registrarse</p>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <app-register></app-register>
+    <br>
+    <p (click)="Swap()" style="color: cornflowerblue; cursor: pointer; text-align: center;">Volver al inicio</p>
+  </ng-template>
+
+</div>

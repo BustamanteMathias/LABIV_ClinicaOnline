@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <!--COLUMNA VACIA-->
+    </div>
+
+    <div class="col">
+      <form [formGroup]="form" novalidate>
+      <div class="text-center contenedorLogin">
+        <div>
+          <form>
+            <img class="mb-4" src="https://cdn.pixabay.com/photo/2020/12/09/16/40/doctor-5817903_960_720.png" alt="" width="100" height="100">
+            <h1 class="h3 mb-3 fw-normal">INGRESAR</h1>
+
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInput" placeholder="nombre@correo.com" formControlName="correo">
+              <label for="floatingInput">Correo</label>
+
+              <div class="error" *ngIf="form.get('correo').errors && form.get('correo').touched">
+                <p *ngIf="form.get('correo').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form.get('correo').hasError('email')">
+                  Correo no valido. <br>
+                </p>
+              </div>
+            </div>
+            <br>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="contraseña" formControlName="password">
+              <label for="floatingPassword">Contraseña</label>
+
+              <div class="error" *ngIf="form.get('password').errors && form.get('password').touched">
+                <p *ngIf="form.get('password').hasError('required')">
+                  Es un campo requerido. <br>
+                </p>
+                <p *ngIf="form.get('password').hasError('maxlength')">
+                  Te pasaste, la contraseña debe ser de al menos 20 caracteres. <br>
+                </p>
+                <p *ngIf="form.get('password').hasError('minlength')">
+                  Por favor, una contraseña minima de 6 caracteres. <br>
+                </p>
+              </div>
+            </div>
+
+            <div *ngIf="this.errorCuenta">
+              <br>
+              <div class="alert alert-danger" role="alert">
+                <a href="#" class="alert-link">ERROR</a>. Verifique datos o <a href="#"
+                  class="alert-link">registresé</a> si no poseé una cuenta.
+              </div>
+            </div>
+
+            <br>
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" [checked]="this.cRecordar" (change)="this.cRecordar = !this.cRecordar"> Recordarme <br> <br>
+              </label>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+              <label (click)="HardcodeoUsuarios('PACIENTE')" class="btn btn-outline-primary" for="btnradio1">Paciente</label>
+
+              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+              <label (click)="HardcodeoUsuarios('ADMIN')" class="btn btn-outline-primary" for="btnradio2">Admin</label>
+
+              <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+              <label (click)="HardcodeoUsuarios('PROFESIONAL')" class="btn btn-outline-primary" for="btnradio3">Profesional</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="Ingresar($event)">Ingresar</button>
+
+          </form>
+        </div>
+      </div>
+      </form>
+    </div>
+
+    <div class="col">
+      <!--COLUMNA VACIA-->
+    </div>
+  </div>
+</div>
