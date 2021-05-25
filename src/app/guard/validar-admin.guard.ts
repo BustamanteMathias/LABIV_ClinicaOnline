@@ -7,18 +7,15 @@ import { FirebaseService } from "../service/firebase.service";
 })
 export class ValidarAdminGuard implements CanActivate {
 
-  constructor(private firebase: FirebaseService, private router: Router) {
+  constructor(private firebase: FirebaseService) {}
 
-  }
   canActivate(): boolean {
+    let rtn:boolean = false;
 
     if(this.firebase.userData$.tipo == 'ADMIN'){
       return true;
-    }else{
-      this.router.navigate(['error404']);
-      return false;
     }
 
+    return rtn;
   }
-
 }

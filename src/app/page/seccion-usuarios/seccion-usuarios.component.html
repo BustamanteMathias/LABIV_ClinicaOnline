@@ -23,14 +23,8 @@
     <div *ngSwitchCase="'ALTA'">
       <!-- ALTAS DE USUARUIS -->
       <div class="altaPacienteProfesional">
-        <br>
         <div class="row">
-          <div class="col">
-            <app-register></app-register>
-          </div>
-          <div class="col">
-            <app-registro-admin></app-registro-admin>
-          </div>
+          <app-register [verAdministrador]='true'></app-register>
         </div>
       </div>
 

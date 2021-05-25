@@ -1,0 +1,28 @@
+<div class="card" style="width: 18rem; background-color:rgb(255, 255, 255)">
+  <div class="card-body">
+    <h5 class="card-title"><strong>{{this.paciente.apellido}}, {{this.paciente.nombre}}</strong></h5>
+    <div class="row">
+      <div class="col">
+        <h6 class="card-subtitle mb-2 text-muted">{{this.paciente.tipo}} {{this.numero}}</h6>
+        <p class="card-text">
+          <strong>DNI</strong> {{this.paciente.dni}}<br>
+          <strong>Edad</strong> {{this.paciente.edad}}<br>
+          <strong>Correo</strong> {{this.paciente.correo}}
+        </p>
+      </div>
+      <div class="col">
+        <div class="centrar">
+          <img src="https://cdn.pixabay.com/photo/2020/12/09/16/40/doctor-5817903_960_720.png"
+            class="rounded-circle border border-info" width="50" height="50"> <br> <br>
+          <img src="https://cdn.pixabay.com/photo/2020/12/09/16/40/doctor-5817903_960_720.png"
+            class="rounded-circle border border-info" width="50" height="50">
+        </div>
+      </div>
+    </div>
+    <button type="button" class="d-grid gap-2 col-6 mx-auto btn btn-info position-relative" (click)="EnviarOutput(this.paciente.correo)">
+      USAR <span
+        class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span
+          class="visually-hidden">unread messages</span></span>
+    </button>
+  </div>
+</div>

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FirebaseService } from '../../service/firebase.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-import { Admin } from '../../model/admin';
+//import { Admin } from '../../model/admin';
 import { Paciente } from '../../model/paciente';
 import { Profesional } from '../../model/profesional';
 
@@ -15,10 +15,13 @@ import { Profesional } from '../../model/profesional';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  @Input() verAdministrador = false;
+
   form: FormGroup;
   form2: FormGroup;
 
-  tipo: string = 'PACIENTE';
+  verOpcion:boolean = true;
+  tipo: string = ''; //PACIENTE
   titulo: string = 'PACIENTE';
   btnCanbiarRegistro: string = '';
   captchas: string[] = [
@@ -58,16 +61,10 @@ export class RegisterComponent implements OnInit {
     this.listaProfesiones = this.firebase.firebaseProfesiones;
   }
 
-  CambiarTipoRegistro() {
+  SetTipoRegistro(tipoRegistro:string) {
     this.RecargarCaptcha();
-
-    if (this.tipo == 'PACIENTE') {
-      this.btnCanbiarRegistro = this.tipo;
-      this.tipo = 'PROFESIONAL';
-    } else {
-      this.btnCanbiarRegistro = this.tipo;
-      this.tipo = 'PACIENTE';
-    }
+    this.tipo = tipoRegistro;
+    this.verOpcion = false;
   }
 
   RecargarCaptcha() {
@@ -245,7 +242,7 @@ export class RegisterComponent implements OnInit {
         paciente.foto2 = '';
 
         this.Register(paciente.correo, pass, paciente);
-        this.router.navigate(['']);
+        this.router.navigate(['bienvenido']);
       } else {
         this.form.markAllAsTouched();
         //this.toastr.warning('TEXTO 1!', 'TEXTO 2');
@@ -276,6 +273,7 @@ export class RegisterComponent implements OnInit {
         });
 
         this.Register(profesional.correo, pass, profesional);
+        this.router.navigate(['bienvenido']);
       } else {
         this.form2.markAllAsTouched();
         //this.toastr.warning('TEXTO 1!', 'TEXTO 2');
@@ -337,6 +335,15 @@ export class RegisterComponent implements OnInit {
       })
       .catch((error) => {
         console.log(error);
-      });
+    });
+  }
+
+  Volver(path:string){
+    this.router.navigate([path]);
+  }
+
+  Ir(){
+    this.tipo = '';
+    this.verOpcion = true;
   }
 }

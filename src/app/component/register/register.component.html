@@ -1,12 +1,38 @@
+<!-- REGISTRO -->
+<br><br>
+<div class="container px-4" *ngIf="this.verOpcion">
+  <div class="row gx-5">
+    <div class="col">
+     <div class="p-3 border bg-light largo">
+       <button class="botones" (click)="SetTipoRegistro('PACIENTE')">PACIENTE</button>
+     </div>
+    </div>
+    <div class="col">
+      <div class="p-3 border bg-light largo">
+        <button class="botones" (click)="SetTipoRegistro('PROFESIONAL')">PROFESIONAL</button>
+      </div>
+    </div>
+    <div class="col" *ngIf="this.verAdministrador">
+      <div class="p-3 border bg-light largo">
+        <button class="botones" (click)="SetTipoRegistro('ADMINISTRADOR')">ADMINISTRADOR</button>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+  <div *ngIf="this.verAdministrador == false">
+    <button class="w-100 btn btn-lg btn-danger" (click)="Volver('bienvenido')">VOLVER</button>
+  </div>
+</div>
+
+<!-- REGISTRO -->
+
 <div class="container">
 
-  <ng-container *ngIf="this.tipo == 'PACIENTE'; else elseTemplate">
+  <div *ngIf="this.tipo == 'PACIENTE';">
     <div class="text-center contenedorLogin">
       <img class="mb-4" src="https://image.flaticon.com/icons/png/512/1533/1533790.png" alt="" width="100" height="100">
       <h1 class="h3 mb-3 fw-normal">{{this.tipo}}</h1>
-      <button type="button" class="btn btn-warning" (click)="CambiarTipoRegistro()">REGISTRARSE COMO <strong>{{this.btnCanbiarRegistro}}</strong></button>
-      <br>
-      <br>
     </div>
 
     <form [formGroup]="form" novalidate>
@@ -180,14 +206,15 @@
         </div>
       </div>
 
-      <button class="w-100 btn btn-lg btn-success" type="submit" (click)="RegistrarPaciente($event)">Registrar <strong>PACIENTE</strong></button>
+      <button class="w-100 btn btn-lg btn-success" type="submit" (click)="RegistrarPaciente($event)">Registrar <strong>PACIENTE</strong></button><br><br>
+      <button class="w-100 btn btn-lg btn-danger" (click)="Ir()">VOLVER</button>
     </form>
-  </ng-container>
-  <ng-template #elseTemplate>
+  </div>
+
+  <div *ngIf="this.tipo == 'PROFESIONAL'">
     <div class="text-center contenedorLogin">
       <img class="mb-4" src="https://image.flaticon.com/icons/png/512/194/194915.png" alt="" width="100" height="100">
       <h1 class="h3 mb-3 fw-normal">{{this.tipo}}</h1>
-      <button type="button" class="btn btn-warning" (click)="CambiarTipoRegistro()">REGISTRARSE COMO <strong>{{this.btnCanbiarRegistro}}</strong></button>
       <br>
       <span *ngFor="let item of this._pProfesiones">
         <span class="badge bg-info">{{item}}</span>
@@ -379,9 +406,13 @@
         </div>
       </div>
 
-      <button class="w-100 btn btn-lg btn-success" type="submit" (click)="RegistrarProfesional($event)">Registrar <strong>PROFESIONAL</strong></button>
+      <button class="w-100 btn btn-lg btn-success" type="submit" (click)="RegistrarProfesional($event)">Registrar <strong>PROFESIONAL</strong></button><br><br>
+      <button class="w-100 btn btn-lg btn-danger" (click)="Ir()">VOLVER</button>
     </form>
-  </ng-template>
+  </div>
 
+  <div *ngIf="this.tipo == 'ADMINISTRADOR'">
+    <app-registro-admin></app-registro-admin>
+  </div>
 
 </div>

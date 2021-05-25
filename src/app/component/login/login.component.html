@@ -54,22 +54,12 @@
             <br>
             <div class="checkbox mb-3">
               <label>
-                <input type="checkbox" [checked]="this.cRecordar" (change)="this.cRecordar = !this.cRecordar"> Recordarme <br> <br>
+                <input type="checkbox" [checked]="this.cRecordar" (change)="this.cRecordar = !this.cRecordar"> Recordarme <br>
               </label>
             </div>
 
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-              <label (click)="HardcodeoUsuarios('PACIENTE')" class="btn btn-outline-primary" for="btnradio1">Paciente</label>
-
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-              <label (click)="HardcodeoUsuarios('ADMIN')" class="btn btn-outline-primary" for="btnradio2">Admin</label>
-
-              <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-              <label (click)="HardcodeoUsuarios('PROFESIONAL')" class="btn btn-outline-primary" for="btnradio3">Profesional</label>
-            </div>
-
-            <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="Ingresar($event)">Ingresar</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="Ingresar($event)">Ingresar</button><br><br>
+            <button class="w-100 btn btn-lg btn-danger" type="submit" (click)="Ir('bienvenido')">Volver</button>
 
           </form>
         </div>
@@ -79,6 +69,30 @@
 
     <div class="col">
       <!--COLUMNA VACIA-->
+    </div>
+  </div>
+
+  <br><br>
+
+</div>
+<button class="botonTest" [@animacionBoton]='this.estadoAnimacion' (click)="VerUsuariosTest()">USUARIOS TEST</button>
+
+<div [@animacionUsuariosTest] class="centrar" *ngIf="this.verUsuariosTest">
+  <div class="row" style="width: 100%;">
+    <div class="col">
+      <app-card-paciente [paciente]='this.Paciente1' [numero]='1' (outPut_Correo)='GetCorreoCard($event)'></app-card-paciente>
+    </div>
+    <div class="col">
+      <app-card-paciente [paciente]='this.Paciente2' [numero]='2' (outPut_Correo)='GetCorreoCard($event)'></app-card-paciente>
+    </div>
+    <div class="col">
+      <app-card-profesional [profesional]='this.Admin' [numero]='1' (outPut_Correo)='GetCorreoCard($event)'></app-card-profesional>
+    </div>
+    <div class="col">
+      <app-card-profesional [profesional]='this.Profesional1' [numero]='2' (outPut_Correo)='GetCorreoCard($event)'></app-card-profesional>
+    </div>
+    <div class="col">
+      <app-card-profesional [profesional]='this.Profesional2' [numero]='2' (outPut_Correo)='GetCorreoCard($event)'></app-card-profesional>
     </div>
   </div>
 </div>

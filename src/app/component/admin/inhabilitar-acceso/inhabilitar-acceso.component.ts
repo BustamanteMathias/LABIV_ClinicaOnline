@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FirebaseService } from '../../../service/firebase.service';
 
 @Component({
   selector: 'app-inhabilitar-acceso',
@@ -9,9 +10,13 @@ export class InhabilitarAccesoComponent implements OnInit {
 
   @Input() listaProfesionales:any;
 
-  constructor() { }
+  constructor(private firebase: FirebaseService) { }
 
   ngOnInit(): void {
   }
 
+  Inhabilitar(profesional:any){
+    profesional.estado = 'PENDIENTE';
+    this.firebase.Update_Usuario(profesional);
+  }
 }

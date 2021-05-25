@@ -29,6 +29,19 @@ import { NuevosUsuariosComponent } from './component/admin/nuevos-usuarios/nuevo
 import { RegistroAdminComponent } from './component/admin/registro-admin/registro-admin.component';
 import { InicioAdminComponent } from './component/admin/inicio-admin/inicio-admin.component';
 import { SprinnerComponent } from './component/sprinner/sprinner.component';
+import { PageLoginComponent } from './page/page-login/page-login.component';
+import { PageRegisterComponent } from './page/page-register/page-register.component';
+import { CardPacienteComponent } from './component/varios/card-paciente/card-paciente.component';
+import { CardProfesionalComponent } from './component/varios/card-profesional/card-profesional.component';
+import { LoginUsuariosTestComponent } from './component/varios/login-usuarios-test/login-usuarios-test.component';
+import { PacienteComponent } from './page/paciente/paciente.component';
+import { ProfesionalComponent } from './page/profesional/profesional.component';
+import { MiPerfilProfesinalComponent } from './component/profesional/mi-perfil-profesinal/mi-perfil-profesinal.component';
+import { MiPerfilPacienteComponent } from './component/paciente/mi-perfil-paciente/mi-perfil-paciente.component';
+import { MiPerfilAdminComponent } from './component/admin/mi-perfil-admin/mi-perfil-admin.component';
+import { MisTurnosPacienteComponent } from './component/paciente/mis-turnos-paciente/mis-turnos-paciente.component';
+import { SolicitarTurnoPacienteComponent } from './component/paciente/solicitar-turno-paciente/solicitar-turno-paciente.component';
+import { MisTurnosProfesionalComponent } from './component/profesional/mis-turnos-profesional/mis-turnos-profesional.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +57,20 @@ import { SprinnerComponent } from './component/sprinner/sprinner.component';
     NuevosUsuariosComponent,
     RegistroAdminComponent,
     InicioAdminComponent,
-    SprinnerComponent
+    SprinnerComponent,
+    PageLoginComponent,
+    PageRegisterComponent,
+    CardPacienteComponent,
+    CardProfesionalComponent,
+    LoginUsuariosTestComponent,
+    PacienteComponent,
+    ProfesionalComponent,
+    MiPerfilProfesinalComponent,
+    MiPerfilPacienteComponent,
+    MiPerfilAdminComponent,
+    MisTurnosPacienteComponent,
+    SolicitarTurnoPacienteComponent,
+    MisTurnosProfesionalComponent
   ],
   imports: [
     BrowserModule,

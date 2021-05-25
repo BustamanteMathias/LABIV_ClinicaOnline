@@ -192,4 +192,8 @@ export class RegistroAdminComponent implements OnInit {
         console.log(error);
       });
   }
+
+  Ir(){
+    //this.router.navigate(['admin/usuarios']);
+  }
 }

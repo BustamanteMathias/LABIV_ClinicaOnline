@@ -19,7 +19,7 @@
       <td>{{item.dni}}</td>
       <td>{{item.tipo}}</td>
       <td><span class="badge bg-success">{{item.estado}}</span></td>
-      <td><button type="button" class="btn btn-danger">Inhabilitar Acceso</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="Inhabilitar(item)">Inhabilitar Acceso</button></td>
     </tr>
   </tbody>
 </table>

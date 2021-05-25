@@ -19,7 +19,7 @@
       <td>{{item.dni}}</td>
       <td>{{item.tipo}}</td>
       <td><span class="badge bg-warning text-dark">{{item.estado}}</span></td>
-      <td><button type="button" class="btn btn-success">Habilitar Acceso</button></td>
+      <td><button type="button" class="btn btn-success" (click)="Habilitar(item)">Habilitar Acceso</button></td>
     </tr>
   </tbody>
 </table>

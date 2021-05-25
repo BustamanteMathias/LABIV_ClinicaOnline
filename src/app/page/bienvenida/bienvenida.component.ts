@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bienvenida',
@@ -7,14 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BienvenidaComponent implements OnInit {
 
-  swap:boolean = true;
+  pathIcon:string = '../../../assets/favicon.png';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  Swap(){
-    this.swap = !this.swap;
+  Ir(path:string){
+    this.router.navigate([path]);
   }
 }

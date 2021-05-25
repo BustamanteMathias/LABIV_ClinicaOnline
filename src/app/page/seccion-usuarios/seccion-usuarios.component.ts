@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 import { FirebaseService } from '../../service/firebase.service';
 
 @Component({
@@ -7,6 +9,8 @@ import { FirebaseService } from '../../service/firebase.service';
   styleUrls: ['./seccion-usuarios.component.scss']
 })
 export class SeccionUsuariosComponent implements OnInit {
+
+  listaUsuarios: Observable<any[]>;
 
   listaProfesionalesPendientes:any[]=[];
   listaProfesionalesAlta:any[]=[];
@@ -18,20 +22,33 @@ export class SeccionUsuariosComponent implements OnInit {
 
   spinner:boolean = false;
 
-  constructor(private firebase: FirebaseService) {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 4000);
+  constructor(private context: AngularFireDatabase) {
+
   }
 
 
   ngOnInit(): void {
-    this.listaProfesionalesPendientes = this.firebase.GetProfesionales().filter(profesional => profesional.estado == 'PENDIENTE');
-    this.listaProfesionalesAlta = this.firebase.GetProfesionales().filter(profesional => profesional.estado == 'ALTA');
+    this.spinner = true;
 
-    this.listaPacientes = this.firebase.GetPacientes();
-    this.listaProfesionales = this.firebase.GetProfesionales();
+    this.listaUsuarios = this.context.list('usuarios').valueChanges();
+    this.listaUsuarios.subscribe(
+      (response) => {
+        //GUARDO TODOS LOS USUARIOS
+
+        this.listaPacientes = response.filter(paciente => paciente.tipo == 'PACIENTE');
+        this.listaProfesionales = response.filter(paciente => paciente.tipo == 'PROFESIONAL');
+
+        this.listaProfesionalesPendientes = this.listaProfesionales.filter(profesional => profesional.estado == 'PENDIENTE');
+        this.listaProfesionalesAlta = this.listaProfesionales.filter(profesional => profesional.estado == 'ALTA');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    setTimeout(() => {
+      this.spinner = false;
+    }, 1000);
   }
 
   GetSelect($event){

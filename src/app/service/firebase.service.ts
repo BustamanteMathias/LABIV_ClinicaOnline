@@ -172,6 +172,12 @@ export class FirebaseService {
     }
   }
 
+  Update_Usuario(value) {
+    this.GetCurrentUser().then((response: any) => {
+      this.context.list('usuarios').update(value.id, value);
+    });
+  }
+
   async EnviarMailDeVerificacion() {
     return await (await this.AFauth.currentUser).sendEmailVerification();
   }
@@ -188,6 +194,7 @@ export class FirebaseService {
     this.firebaseUsuarios.forEach(u =>{
       if(u.estado == 'ALTA' && u.id == uid){
         this.userData$ = u;
+        localStorage.setItem('uid', u.id);
       }
     });
   }

@@ -1,7 +1,21 @@
-.contenedorLogin{
+.contenedorLogin {
   margin-top: 30%;
 }
 
-.error{
+.error {
   color: brown;
+}
+
+.centrar {
+  align-items: center;
+  justify-content: center;
+  margin-left: 15%;
+}
+
+.botonTest {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  margin-left: 3%;
+  margin-top: 7%;
 }
