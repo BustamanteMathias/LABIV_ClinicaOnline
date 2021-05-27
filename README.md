@@ -11,7 +11,7 @@
 <h3 style="color: coral;"><strong>INSTALACIÓN</strong></h3>
 <pre>
   //CLONAR REPOSITORIO
-  $ git clone https://github.com/BustamanteMathias/ClinicaOnline.git
+  $ git clone https://github.com/BustamanteMathias/LABIV_ClinicaOnline.git
 </pre>
 <pre>
   //INSTALAR MODULOS

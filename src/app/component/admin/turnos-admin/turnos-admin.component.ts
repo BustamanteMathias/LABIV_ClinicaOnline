@@ -18,10 +18,19 @@ export class TurnosAdminComponent implements OnInit {
 
   listaDOM: any[] = [];
   filterPost: string = '';
+  //GESTION DE DOM
+  verTabla:boolean = true;
+  verCancelarTurno:boolean = false;
+
+  //
+
+  msjAux:string = '';
+  itemActual:any;
 
   constructor(
     private router: Router,
-    private context: AngularFireDatabase
+    private context: AngularFireDatabase,
+    private firebase:FirebaseService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +73,34 @@ export class TurnosAdminComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  Cancelar(item: any) {
+    this.verTabla = false;
+    this.itemActual = item;
+    this.verCancelarTurno = true;
+  }
+
+  eventCancelarTurno(event$) {
+    setTimeout(() => {
+      if (event$) {
+        this.itemActual.turno.comentarioProfesional = this.msjAux;
+        this.itemActual.turno.estado = 'CANCELADO';
+        this.firebase.Update_Turno(this.itemActual.turno);
+        this.verCancelarTurno = false;
+        this.verTabla = true;
+
+        this.itemActual = [];
+        this.msjAux = '';
+      } else {
+        this.verCancelarTurno = false;
+        this.verTabla = true;
+      }
+    }, 200);
+  }
+
+  setMsj(event$: string) {
+    this.msjAux = event$;
   }
 
   Volver() {

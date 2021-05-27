@@ -17,13 +17,22 @@ export class MisTurnosPacienteComponent implements OnInit {
 
   listaDOM: any[] = [];
   filterPost: string = '';
+  //CONTROL DOM
+  verTabla: boolean = true;
+  eventOpcion: boolean = false;
+
+  verCancelarTurno: boolean = false;
+  verReseniaTurno: boolean = false;
+  verAtencionTurno:boolean = false;
+  //
+  itemActual: any;
+  msjAux: string = '';
 
   constructor(
     private router: Router,
     private firebase: FirebaseService,
     private context: AngularFireDatabase
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.listaUsuarios = this.context.list('usuarios').valueChanges();
@@ -62,6 +71,71 @@ export class MisTurnosPacienteComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  Cancelar(item: any) {
+    this.verTabla = false;
+    this.itemActual = item;
+    this.verCancelarTurno = true;
+  }
+
+  Resenia(item:any){
+    this.verTabla = false;
+    this.itemActual = item;
+    this.verReseniaTurno = true;
+  }
+
+  Atencion(item:any){
+    this.verTabla = false;
+    this.itemActual = item;
+    this.verAtencionTurno = true;
+  }
+
+  eventCancelarTurno(event$) {
+    setTimeout(() => {
+      if (event$) {
+        this.itemActual.turno.comentarioPaciente = this.msjAux;
+        this.itemActual.turno.estado = 'CANCELADO';
+        this.firebase.Update_Turno(this.itemActual.turno);
+        this.verCancelarTurno = false;
+        this.verTabla = true;
+
+        this.itemActual = [];
+        this.msjAux = '';
+      } else {
+        this.verCancelarTurno = false;
+        this.verTabla = true;
+      }
+    }, 200);
+  }
+
+  eventAtencionTurno(event$) {
+    setTimeout(() => {
+      if (event$) {
+        this.itemActual.turno.comentarioPaciente = this.msjAux;
+        this.firebase.Update_Turno(this.itemActual.turno);
+        this.verAtencionTurno = false;
+        this.verTabla = true;
+
+        this.itemActual = [];
+        this.msjAux = '';
+      } else {
+        this.verAtencionTurno = false;
+        this.verTabla = true;
+      }
+    }, 200);
+  }
+
+  eventReseniaTurno(event$){
+    if(!event$){
+      this.verReseniaTurno = false;
+      this.itemActual = [];
+      this.verTabla = true;
+    }
+  }
+
+  setMsj(event$: string) {
+    this.msjAux = event$;
   }
 
   VolverPaciente() {

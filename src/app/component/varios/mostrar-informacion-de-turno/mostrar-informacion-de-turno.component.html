@@ -22,8 +22,19 @@
               <div *ngIf="this.Turno.estado == 'FINALIZADO'"><span class="badge bg-info">{{this.Turno.estado}}</span>
               </div>
 
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"
-                [(ngModel)]="this.Turno.comentarioProfesional" disabled></textarea>
+              <br>
+              <div *ngIf="this.Turno.comentarioProfesional != ''">
+                <p><strong>[RESEÑA DE PROFESIONAL]</strong></p>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"
+                  [(ngModel)]="this.Turno.comentarioProfesional" disabled></textarea>
+              </div>
+              <br>
+              <div *ngIf="this.Turno.comentarioPaciente != ''">
+                <p><strong>[RESEÑA DE PACIENTE]</strong></p>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"
+                  [(ngModel)]="this.Turno.comentarioPaciente" disabled></textarea>
+              </div>
+
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-danger" type="button" (click)="Confirmar(false)">VOLVER</button>
