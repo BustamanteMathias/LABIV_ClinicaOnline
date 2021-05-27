@@ -1,0 +1,28 @@
+<div class="contenedor">
+  <div style="margin-top: 10%; position: relative;" [@animacionMenu]>
+
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <div class="card" style="width: 50rem; text-align: center;">
+          <h3>¿Seguro que desea <strong>{{this.Titulo}}</strong> el turno?</h3>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">{{this.subTitulo}}</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="msj" [(ngModel)]='this.msj'></textarea>
+            </div>
+            <app-diagnostico></app-diagnostico>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+              <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</div>
+

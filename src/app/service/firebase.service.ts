@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
+import { Turno } from '../model/turno';
 
 @Injectable({
   providedIn: 'root',
@@ -114,6 +115,11 @@ export class FirebaseService {
     });
   }
 
+  Insert_Turno(t: Turno): Promise<void> {
+    t.GenerarID();
+    return this.context.list('turnos').set(t.id, t);
+  }
+
   Insert_Usuario(p: any) {
     switch (p.tipo) {
       case 'PACIENTE':
@@ -175,6 +181,12 @@ export class FirebaseService {
   Update_Usuario(value) {
     this.GetCurrentUser().then((response: any) => {
       this.context.list('usuarios').update(value.id, value);
+    });
+  }
+
+  Update_Turno(value) {
+    this.GetCurrentUser().then((response: any) => {
+      this.context.list('turnos').update(value.id, value);
     });
   }
 

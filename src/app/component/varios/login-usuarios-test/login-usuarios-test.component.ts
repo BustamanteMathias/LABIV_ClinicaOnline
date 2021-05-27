@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,10 +16,15 @@ export class LoginUsuariosTestComponent implements OnInit {
   Profesional1: any;
   Profesional2: any;
 
+  refFoto1: any;
+  refFoto2: any;
+
   @Output() correoEvent = new EventEmitter<string>();
   correoHardcodeo: string = '';
 
-  constructor(private context: AngularFireDatabase) {}
+  constructor(
+    private context: AngularFireDatabase,
+  ) {}
 
   ngOnInit(): void {
     this.listaUsuarios = this.context.list('usuarios').valueChanges();
@@ -48,6 +54,7 @@ export class LoginUsuariosTestComponent implements OnInit {
               break;
           }
         });
+
       },
       (error) => {
         console.log(error);

@@ -1,0 +1,194 @@
+<div *ngIf="this.tipoUsuario == 'PACIENTE'">
+  <div class="row g-0 contenedor">
+    <div class="col-sm-6 col-md-8 perfil" [@animacionMenu]>
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('paciente/mis-turnos')">MIS
+          TURNOS</button>
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('paciente/solicitar-turno')">SOLICITAR
+          TURNO</button>
+        <button type="button" class="btn btn-outline-info botones"
+          (click)="Ir('paciente/historial-clinico')">HISTORIAL</button>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 opciones ">
+      <br>
+      <h3 style="text-align: center;">{{this.objAux.apellido}}, {{this.objAux.nombre}}</h3><br>
+      <img src={{this.objAux.foto1}} class="rounded float-start rounded-circle border border-dark"
+        style="width: 200px; height: 200px;">
+      <img src={{this.objAux.foto2}} class="rounded float-end rounded-circle border border-dark"
+        style="width: 200px; height: 200px;">
+
+      <div style="margin-top: 50%;">
+        <img src="../../../assets/Iconos/at-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[CORREO]&nbsp;&nbsp;</strong>{{this.objAux.correo}}</span><br><br>
+        <img src="../../../assets/Iconos/address-card-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[DNI]&nbsp;&nbsp;</strong>{{this.objAux.dni}}</span><br><br>
+        <img src="../../../assets/Iconos/user-alt-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[EDAD]&nbsp;&nbsp;</strong>{{this.objAux.edad}}</span><br><br>
+        <img src="../../../assets/Iconos/first-aid-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[OBRA SOCIAL]&nbsp;&nbsp;</strong>{{this.objAux.obraSocial}}</span><br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="this.tipoUsuario == 'PROFESIONAL'">
+  <div class="row g-0 contenedor">
+    <div class="col-sm-6 col-md-8 perfil" [@animacionMenu]>
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('profesional/mis-turnos')">MIS TURNOS</button>
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('profesional/mis-horarios')">MIS HORARIOS </button>
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('profesional/pacientes')">PACIENTES</button>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 opciones ">
+      <h3 style="text-align: center;">{{this.objAux.apellido}}, {{this.objAux.nombre}}</h3><br>
+      <img src={{this.objAux.foto1}} class="rounded float-start rounded-circle border border-dark"
+        style="width: 200px; height: 200px;">
+
+        <table class="table" style="margin-top: 40%;">
+          <thead>
+            <tr>
+              <th scope="col" style="color: brown;">SERVICIOS</th>
+              <th scope="col">LUN</th>
+              <th scope="col">MAR</th>
+              <th scope="col">MIE</th>
+              <th scope="col">JUE</th>
+              <th scope="col">VIE</th>
+              <th scope="col">SAB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">INICIO</th>
+              <ng-container *ngIf="this.horariosProfesional.lunes.estado; else lunes">
+                <td>{{this.horariosProfesional.lunes.inicio}}</td>
+              </ng-container>
+              <ng-template #lunes>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.martes.estado; else martes">
+                <td>{{this.horariosProfesional.martes.inicio}}</td>
+              </ng-container>
+              <ng-template #martes>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.miercoles.estado; else miercoles">
+                <td>{{this.horariosProfesional.miercoles.inicio}}</td>
+              </ng-container>
+              <ng-template #miercoles>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.jueves.estado; else jueves">
+                <td>{{this.horariosProfesional.jueves.inicio}}</td>
+              </ng-container>
+              <ng-template #jueves>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.viernes.estado; else viernes">
+                <td>{{this.horariosProfesional.viernes.inicio}}</td>
+              </ng-container>
+              <ng-template #viernes>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.sabado.estado; else sabado">
+                <td>{{this.horariosProfesional.sabado.inicio}}</td>
+              </ng-container>
+              <ng-template #sabado>
+                <td>N/A</td>
+              </ng-template>
+            </tr>
+            <tr>
+              <th scope="row">FIN</th>
+              <ng-container *ngIf="this.horariosProfesional.lunes.estado; else lunes">
+                <td>{{this.horariosProfesional.lunes.fin}}</td>
+              </ng-container>
+              <ng-template #lunes>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.martes.estado; else martes">
+                <td>{{this.horariosProfesional.martes.fin}}</td>
+              </ng-container>
+              <ng-template #martes>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.miercoles.estado; else miercoles">
+                <td>{{this.horariosProfesional.miercoles.fin}}</td>
+              </ng-container>
+              <ng-template #miercoles>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.jueves.estado; else jueves">
+                <td>{{this.horariosProfesional.jueves.fin}}</td>
+              </ng-container>
+              <ng-template #jueves>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.viernes.estado; else viernes">
+                <td>{{this.horariosProfesional.viernes.fin}}</td>
+              </ng-container>
+              <ng-template #viernes>
+                <td>N/A</td>
+              </ng-template>
+
+              <ng-container *ngIf="this.horariosProfesional.sabado.estado; else sabado">
+                <td>{{this.horariosProfesional.sabado.fin}}</td>
+              </ng-container>
+              <ng-template #sabado>
+                <td>N/A</td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      <div>
+        <img src="../../../assets/Iconos/at-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[CORREO]&nbsp;&nbsp;</strong>{{this.objAux.correo}}</span><br><br>
+        <img src="../../../assets/Iconos/address-card-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[DNI]&nbsp;&nbsp;</strong>{{this.objAux.dni}}</span><br><br>
+        <img src="../../../assets/Iconos/user-alt-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[EDAD]&nbsp;&nbsp;</strong>{{this.objAux.edad}}</span><br><br>
+        <img src="../../../assets/Iconos/jobs.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[ESPECIALIDADES]&nbsp;&nbsp;</strong>{{this.listaEspecialidades}}</span><br><br>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="this.tipoUsuario == 'ADMIN'">
+  <div class="row g-0 contenedor">
+    <div class="col-sm-6 col-md-8 perfil" [@animacionMenu]>
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('admin/seccion-usuarios')">HABILITAR / INHABILITAR / ALTAS DE USUARIO</button>
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('admin/usuarios')">USUARIOS</button>
+        <button type="button" class="btn btn-outline-info botones" (click)="Ir('admin/turnos')">TURNOS</button>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 opciones ">
+      <h3 style="text-align: center;">{{this.objAux.apellido}}, {{this.objAux.nombre}}</h3><br>
+      <img src={{this.objAux.foto1}} class="rounded float-start rounded-circle border border-dark"
+        style="width: 200px; height: 200px;">
+
+      <div style="margin-top: 50%;">
+        <img src="../../../assets/Iconos/at-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[CORREO]&nbsp;&nbsp;</strong>{{this.objAux.correo}}</span><br><br>
+        <img src="../../../assets/Iconos/address-card-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[DNI]&nbsp;&nbsp;</strong>{{this.objAux.dni}}</span><br><br>
+        <img src="../../../assets/Iconos/user-alt-solid.svg" class="iconos">
+        <span>&nbsp;&nbsp;<strong>[EDAD]&nbsp;&nbsp;</strong>{{this.objAux.edad}}</span><br><br>
+      </div>
+
+    </div>
+  </div>
+</div>

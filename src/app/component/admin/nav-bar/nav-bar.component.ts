@@ -20,8 +20,7 @@ export class NavBarComponent implements OnInit {
     this.SelectNavBar.emit(seleccion);
   }
 
-  CerrarSesion(){
-    this.firebase.LogOutCurrentUser();
-    this.router.navigate(['']);
+  Volver(){
+    this.router.navigate(['admin']);
   }
 }

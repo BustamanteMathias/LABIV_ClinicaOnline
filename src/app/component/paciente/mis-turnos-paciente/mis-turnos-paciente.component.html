@@ -1,1 +1,85 @@
-<p>mis-turnos-paciente works!</p>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="cursor: pointer"><strong>MIS TURNOS</strong></a>
+    <div>
+      <div class="d-flex">
+        <button class="btn btn-outline-warning" (click)='VolverPaciente()'><strong>VOLVER</strong></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div style="margin-top: 5%; text-align: center;">
+  <h1>GESTIONAR TURNOS</h1>
+</div>
+<br>
+<br>
+<div class="filtro">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default"><strong>FILTRAR</strong></span>
+    <input type="text" class="form-control" aria-label="Sizing example input"
+      aria-describedby="inputGroup-sizing-default" [(ngModel)]='this.filterPost' name="filterPost">
+  </div>
+</div>
+
+<div style="margin: 2%;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">PROFESIONAL</th>
+        <th scope="col">ÁREA</th>
+        <th scope="col">DÍA</th>
+        <th scope="col">HORA</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">CANCELAR TURNO</th>
+        <th scope="col">VER RESEÑA</th>
+        <th scope="col">REALIZAR ENCUENTA</th>
+        <th scope="col">CALIFICAR ATENCIÓN</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.listaDOM | filterUsuario:this.filterPost; let i=index ">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.profesional.apellido}}, {{item.profesional.nombre}}</td>
+          <td>{{item.turno.area}}</td>
+          <td>{{item.turno.fecha}}</td>
+          <td>{{item.turno.hora}}</td>
+          <td *ngIf="item.turno.estado == 'PENDIENTE'"><span class="badge bg-warning text-dark">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'ACEPTADO'"><span class="badge bg-success">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'CANCELADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'RECHAZADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'FINALIZADO'"><span class="badge bg-info text-dark">{{item.turno.estado}}</span></td>
+
+          <ng-container *ngIf="item.turno.estado != 'PENDIENTE' || item.turno.estado != 'FINALIZADO'; else tCancelar">
+            <td><button type="button" class="btn btn-danger">CANCELAR TURNO</button></td>
+          </ng-container>
+          <ng-template #tCancelar>
+            <td><button type="button" class="btn btn-danger" disabled>CANCELAR TURNO</button></td>
+          </ng-template>
+
+          <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != ''; else tResenia">
+            <td><button type="button" class="btn btn-primary">VER RESEÑA</button></td>
+          </ng-container>
+          <ng-template #tResenia>
+            <td><button type="button" class="btn btn-primary" disabled>VER RESEÑA</button></td>
+          </ng-template>
+
+          <ng-container *ngIf="item.turno.estado == 'FINALIZADO' && (item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != ''); else tEncuesta">
+            <td><button type="button" class="btn btn-info">REALIZAR ENCUESTA</button></td>
+          </ng-container>
+          <ng-template #tEncuesta>
+            <td><button type="button" class="btn btn-info" disabled>REALIZAR ENCUESTA</button></td>
+          </ng-template>
+
+          <ng-container *ngIf="item.turno.estado == 'FINALIZADO'; else tAtencion">
+            <td><button type="button" class="btn btn-success">CALIFICAR ATENCIÓN</button></td>
+          </ng-container>
+          <ng-template #tAtencion>
+            <td><button type="button" class="btn btn-success" disabled>CALIFICAR ATENCIÓN</button></td>
+          </ng-template>
+
+        </tr>
+    </tbody>
+  </table>
+</div>

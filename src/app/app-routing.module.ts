@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ValidarAdminGuard } from './guard/validar-admin.guard';
-
 import { Error404Component } from "./component/error404/error404.component";
 import { BienvenidaComponent } from "./page/bienvenida/bienvenida.component";
 import { PageLoginComponent } from "./page/page-login/page-login.component";

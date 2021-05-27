@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from "@angular/forms";
 
 // Initialize Firebase
 import { AngularFireDatabaseModule } from "@angular/fire/database";
@@ -14,9 +15,10 @@ import { FirebaseService } from "./service/firebase.service";
 import { environment } from "../environments/environment";
 
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { BienvenidaComponent } from './page/bienvenida/bienvenida.component';
@@ -42,6 +44,20 @@ import { MiPerfilAdminComponent } from './component/admin/mi-perfil-admin/mi-per
 import { MisTurnosPacienteComponent } from './component/paciente/mis-turnos-paciente/mis-turnos-paciente.component';
 import { SolicitarTurnoPacienteComponent } from './component/paciente/solicitar-turno-paciente/solicitar-turno-paciente.component';
 import { MisTurnosProfesionalComponent } from './component/profesional/mis-turnos-profesional/mis-turnos-profesional.component';
+import { MiPerfilGenericoComponent } from './component/mi-perfil-generico/mi-perfil-generico.component';
+import { HistorialComponent } from './component/paciente/historial/historial.component';
+import { FilterUsuarioPipe } from './pipe/filter-usuario.pipe';
+import { NavBarCerrarSesionComponent } from './component/varios/nav-bar-cerrar-sesion/nav-bar-cerrar-sesion.component';
+import { PacientesComponent } from './component/profesional/pacientes/pacientes.component';
+import { HorariosComponent } from './component/profesional/horarios/horarios.component';
+import { FilterProfesionalPipe } from './pipe/filter-profesional.pipe';
+import { UsuariosAdminComponent } from './component/admin/usuarios-admin/usuarios-admin.component';
+import { TurnosAdminComponent } from './component/admin/turnos-admin/turnos-admin.component';
+import { ConfirmarComponent } from './component/varios/confirmar/confirmar.component';
+import { ConfirmarConMensajeComponent } from './component/varios/confirmar-con-mensaje/confirmar-con-mensaje.component';
+import { ConfirmarConMensajeDiagnosticoComponent } from './component/varios/confirmar-con-mensaje-diagnostico/confirmar-con-mensaje-diagnostico.component';
+import { DiagnosticoComponent } from './component/varios/diagnostico/diagnostico.component';
+import { MostrarInformacionDeTurnoComponent } from './component/varios/mostrar-informacion-de-turno/mostrar-informacion-de-turno.component';
 
 @NgModule({
   declarations: [
@@ -70,10 +86,25 @@ import { MisTurnosProfesionalComponent } from './component/profesional/mis-turno
     MiPerfilAdminComponent,
     MisTurnosPacienteComponent,
     SolicitarTurnoPacienteComponent,
-    MisTurnosProfesionalComponent
+    MisTurnosProfesionalComponent,
+    MiPerfilGenericoComponent,
+    HistorialComponent,
+    FilterUsuarioPipe,
+    NavBarCerrarSesionComponent,
+    PacientesComponent,
+    HorariosComponent,
+    FilterProfesionalPipe,
+    UsuariosAdminComponent,
+    TurnosAdminComponent,
+    ConfirmarComponent,
+    ConfirmarConMensajeComponent,
+    ConfirmarConMensajeDiagnosticoComponent,
+    DiagnosticoComponent,
+    MostrarInformacionDeTurnoComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,

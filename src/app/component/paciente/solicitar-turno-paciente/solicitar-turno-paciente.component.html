@@ -1,1 +1,126 @@
-<p>solicitar-turno-paciente works!</p>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" *ngIf="this.EsAdmin == false">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="cursor: pointer"><strong>SACAR TURNO</strong></a>
+    <div>
+      <div class="d-flex">
+        <button class="btn btn-outline-warning" (click)='VolverPaciente()'><strong>VOLVER</strong></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PACIENTE (SOLO PARA ADMIN) -->
+<div class="card" style="margin-top: 5%;" *ngIf="this.EsAdmin == true">
+  <div class="card-body contenedor">
+    <h1>SELECCIONAR PACIENTE</h1>
+    <br><br>
+
+    <div class="btn-group-vertical contenedor">
+      <div *ngFor="let p of this.listaPacientes">
+        <button type="button" class="btn btn-outline-dark" (click)="this.SetPaciente(p)">
+          <h3>{{p.apellido}}, {{p.nombre}}</h3>
+        </button><br><br>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ESPECIALIDADES -->
+<div *ngIf="this.verEspecialidades">
+  <div class="card" style="margin-top: 5%;">
+    <div class="card-body contenedor">
+      <h1>SELECCIONAR ESPECIALIDAD</h1>
+      <br><br>
+
+      <div class="btn-group-vertical contenedor">
+        <div *ngFor="let e of this.listaEspecialidades">
+          <button type="button" class="btn btn-outline-dark" (click)="this.SetEspecialidad(e)">
+            <h3>{{e}}</h3>
+          </button><br><br>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROFESIONALES -->
+<div *ngIf="this.verProfesionales">
+  <div class="card" style="margin-top: 5%;">
+    <div class="card-body contenedor">
+      <h1>SELECCIONAR PROFESIONAL</h1>
+      <br><br>
+
+      <div class="btn-group-vertical contenedor">
+        <div *ngFor="let p of this.listaProfesionalesEspecialidadSeleccionada">
+          <button type="button" class="btn btn-outline-dark" (click)="this.SetProfesional(p)">
+            <h3>{{p.apellido}}, {{p.nombre}}</h3>
+          </button><br><br>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- HORARIOS -->
+<div *ngIf="this.verHorariosDisponibles">
+  <div style="margin-top: 5%;">
+    <div class="contenedorTurno">
+      <h1>SELECCIONAR HORARIO DISPONIBLE</h1>
+      <br><br>
+
+        <div *ngFor="let l of this.listaHorariosDisponibles">
+           <strong><p>{{l.dia}} {{l.fecha}}</p></strong>
+
+           <div class="btn-group btn-group-sm" role="group">
+            <div *ngFor="let h of l.horarios">
+              <button type="button" class="btn btn-outline-dark" style="width: 100px;" (click)="this.SetFechaHora(l.fecha, h)"><h5>{{h}}</h5></button>
+            </div>
+           </div>
+           <br><br>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="contenedor" *ngIf="this.verConfirmar">
+  <div style="margin-top: 10%; position: relative;">
+
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <div class="card" style="width: 50rem;">
+          <h3>¿Seguro que desea <strong>CONFIRMAR</strong> el turno?</h3>
+          <div class="card-body">
+            <img src="../../../assets/Iconos/cosito.svg" class="iconos">
+            <span class="card-text">&nbsp;&nbsp;<strong>[PROFESIONAL]&nbsp;&nbsp;</strong><br>{{this.auxProfesional.apellido}}, {{this.auxProfesional.nombre}}</span><br><br>
+            <img src="../../../assets/Iconos/first-aid-solid.svg" class="iconos">
+            <span class="card-text">&nbsp;&nbsp;<strong>[ESPECIALIDAD]&nbsp;&nbsp;</strong><br>{{this.areaEspecialidad}}</span><br><br>
+            <img src="../../../assets/Iconos/calendar.svg" class="iconos">
+            <span class="card-text">&nbsp;&nbsp;<strong>[DIA]&nbsp;&nbsp;</strong><br>{{this.fecha}}</span><br><br>
+            <img src="../../../assets/Iconos/clock.svg" class="iconos">
+            <span class="card-text">&nbsp;&nbsp;<strong>[HORA]&nbsp;&nbsp;</strong><br>{{this.hora}}</span><br><br>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+              <ng-container *ngIf="this.EsAdmin; else elseTemplate">
+                <button class="btn btn-danger" type="button" (click)="VolverAdmin()">CANCELAR</button>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <button class="btn btn-danger" type="button" (click)="VolverPaciente()">CANCELAR</button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+
+
+  </div>
+</div>

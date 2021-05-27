@@ -1,0 +1,38 @@
+<div class="contenedor">
+  <div style="margin-top: 10%; position: relative;" [@animacionMenu]>
+
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <div class="card" style="width: 50rem; text-align: center;">
+          <h3><strong>{{this.Titulo}}</strong></h3>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">{{this.subTitulo}}</label>
+
+              <div *ngIf="this.Turno.estado == 'PENDIENTE'"><span
+                  class="badge bg-warning text-dark">{{this.Turno.estado}}</span></div>
+              <div *ngIf="this.Turno.estado == 'ACEPTADO'"><span class="badge bg-success">{{this.Turno.estado}}</span>
+              </div>
+              <div *ngIf="this.Turno.estado == 'CANCELADO'"><span class="badge bg-danger">{{this.Turno.estado}}</span>
+              </div>
+              <div *ngIf="this.Turno.estado == 'RECHAZADO'"><span class="badge bg-danger">{{this.Turno.estado}}</span>
+              </div>
+              <div *ngIf="this.Turno.estado == 'FINALIZADO'"><span class="badge bg-info">{{this.Turno.estado}}</span>
+              </div>
+
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"
+                [(ngModel)]="this.Turno.comentarioProfesional" disabled></textarea>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-danger" type="button" (click)="Confirmar(false)">VOLVER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</div>
