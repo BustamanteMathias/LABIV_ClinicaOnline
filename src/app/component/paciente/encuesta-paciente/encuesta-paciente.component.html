@@ -1,0 +1,72 @@
+<div class="contenedor">
+  <div style="margin-top: 10%; position: relative;" [@animacionMenu]>
+
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <div class="card" style="width: 50rem; text-align: center;">
+          <h3><strong>ENCUESTA</strong></h3>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">REALIAZAR ENCUESTA SOBRE LA ATENCION RECIBIDA POR EL ESTABLEIMIENTO</label>
+
+              <br><br>
+              <span><strong>ATENCIÓN RECIBIDA</strong></span>
+              <select class="form-select" [(ngModel)]="this.atencion">
+                <option selected>BUENA</option>
+                <option value="MALA">MALA</option>
+                <option value="BUENA">BUENA</option>
+                <option value="MUY BUENA">MUY BUENA</option>
+                <option value="EXCELENTE">EXCELENTE</option>
+              </select>
+
+              <br><br>
+              <span><strong>ESTADO DEL ESTABLECIMIENTO</strong></span>
+              <select class="form-select" [(ngModel)]="this.estadoEstablecimiento">
+                <option selected>BUENO</option>
+                <option value="MALA">MALO</option>
+                <option value="BUENA">BUENO</option>
+                <option value="MUY BUENA">MUY BUENO</option>
+                <option value="EXCELENTE">EXCELENTE</option>
+              </select>
+
+              <br><br>
+              <div class="row">
+                <div class="col">
+                  <span><strong>¿RECOMENDARÍA NUESTRA CLÍNICA?</strong></span><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="SI" [(ngModel)]="this.recomendacion">
+                    <label class="form-check-label" for="inlineRadio1">SI</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="NO" [(ngModel)]="this.recomendacion">
+                    <label class="form-check-label" for="inlineRadio2">NO</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="customRange2" class="form-label"><strong>¿COMO CALIFICARÍA A NUESTRA CLÍNICA?</strong><br><strong style="color: orange;">{{this.calificacion}}</strong> ESTRELLAS</label>
+                  <input type="range" class="form-range" min="1" max="5" id="customRange2" [(ngModel)]="this.calificacion">
+                </div>
+              </div>
+
+            </div>
+
+            <div *ngIf="this.verError">
+              <div class="alert alert-danger" role="alert">
+                <strong>CAMPOS INCORRECTOS. </strong>Verificar correcto ingreso de datos en la encuesta.
+              </div>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+              <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</div>

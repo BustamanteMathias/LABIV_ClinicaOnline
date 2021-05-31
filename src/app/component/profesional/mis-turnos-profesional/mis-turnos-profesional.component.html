@@ -30,13 +30,9 @@
           <th scope="col">#</th>
           <th scope="col">PACIENTE</th>
           <th scope="col">ÁREA</th>
-          <th scope="col">DÍA</th>
-          <th scope="col">HORA</th>
+          <th scope="col">FECHA</th>
           <th scope="col">ESTADO</th>
-          <th scope="col">CANCELAR/RECHAZAR TURNO</th>
-          <th scope="col">ACEPTAR TURNO</th>
-          <th scope="col">FINALIZAR TURNO</th>
-          <th scope="col">VER RESEÑA</th>
+          <th scope="col">ACCIÓN</th>
         </tr>
       </thead>
       <tbody>
@@ -44,9 +40,9 @@
           <th scope="row">{{i+1}}</th>
           <td>{{item.paciente.apellido}}, {{item.paciente.nombre}}</td>
           <td>{{item.turno.area}}</td>
-          <td>{{item.turno.fecha}}</td>
-          <td>{{item.turno.hora}}</td>
-          <td *ngIf="item.turno.estado == 'PENDIENTE'"><span class="badge bg-warning text-dark">{{item.turno.estado}}</span></td>
+          <td>{{item.turno.fecha}} {{item.turno.hora}}</td>
+          <td *ngIf="item.turno.estado == 'PENDIENTE'"><span
+              class="badge bg-warning text-dark">{{item.turno.estado}}</span></td>
           <td *ngIf="item.turno.estado == 'ACEPTADO'"><span class="badge bg-success">{{item.turno.estado}}</span></td>
           <td *ngIf="item.turno.estado == 'CANCELADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
           <td *ngIf="item.turno.estado == 'RECHAZADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
@@ -55,45 +51,38 @@
 
           <td>
             <ng-container *ngIf="item.turno.estado != 'ACEPTADO' || item.turno.estado != 'FINALIZADO';">
-              <ng-container
-                *ngIf="item.turno.estado != 'RECHAZADO' && item.turno.estado != 'CANCELADO'; else tCancelar">
-                <button type="button" class="btn btn-danger" (click)="Cancelar(item)">CANCELAR</button>&nbsp;&nbsp;
+              <ng-container *ngIf="item.turno.estado != 'RECHAZADO' && item.turno.estado != 'CANCELADO';">
+                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="CANCELAR" style="margin-left: 0.5%;" (click)="Cancelar(item)">
+                  <img src={{this.iconoCancelar}} style="width: 25px; height: 25px;">
+                </button>
               </ng-container>
-              <ng-template #tCancelar>
-                <button type="button" class="btn btn-danger" disabled>CANCELAR</button>&nbsp;&nbsp;
-              </ng-template>
 
-              <ng-container
-                *ngIf="item.turno.estado != 'CANCELADO' && item.turno.estado != 'RECHAZADO'; else tRechazar">
-                <button type="button" class="btn btn-danger" (click)="Rechazar(item)">RECHAZAR</button>
+              <ng-container *ngIf="item.turno.estado != 'CANCELADO' && item.turno.estado != 'RECHAZADO';">
+                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="RECHAZAR" style="margin-left: 0.5%;" (click)="Rechazar(item)">
+                  <img src={{this.iconoRechazar}} style="width: 25px; height: 25px;">
+                </button>
               </ng-container>
-              <ng-template #tRechazar>
-                <button type="button" class="btn btn-danger" disabled>RECHAZAR</button>
-              </ng-template>
+            </ng-container>
+
+
+            <ng-container *ngIf="item.turno.estado == 'PENDIENTE';">
+              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="ACEPTAR" style="margin-left: 0.5%;" (click)="Aceptar(item)">
+                <img src={{this.iconoAceptar}} style="width: 25px; height: 25px;">
+              </button>
+            </ng-container>
+
+            <ng-container *ngIf="item.turno.estado == 'ACEPTADO';">
+              <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="FINALIZAR TURNO" style="margin-left: 0.5%;" (click)="Finalizar(item)">
+                <img src={{this.iconoFinalizar}} style="width: 25px; height: 25px;">
+              </button>
+            </ng-container>
+
+            <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '';">
+              <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="VER RESEÑA" style="margin-left: 0.5%;" (click)="Resenia(item)">
+                <img src={{this.iconoResenia}} style="width: 25px; height: 25px;">
+              </button>
             </ng-container>
           </td>
-
-          <ng-container *ngIf="item.turno.estado == 'PENDIENTE'; else tAceptar">
-            <td><button type="button" class="btn btn-success" (click)="Aceptar(item)">ACEPTAR</button></td>
-          </ng-container>
-          <ng-template #tAceptar>
-            <td><button type="button" class="btn btn-success" disabled>ACEPTAR</button></td>
-          </ng-template>
-
-          <ng-container *ngIf="item.turno.estado == 'ACEPTADO'; else tFinalizar">
-            <td><button type="button" class="btn btn-info" (click)="Finalizar(item)">FINALIZAR TURNO</button></td>
-          </ng-container>
-          <ng-template #tFinalizar>
-            <td><button type="button" class="btn btn-info" disabled>FINALIZAR TURNO</button></td>
-          </ng-template>
-
-          <ng-container
-            *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != ''; else tResenia">
-            <td><button type="button" class="btn btn-success" (click)="Resenia(item)">VER RESEÑA</button></td>
-          </ng-container>
-          <ng-template #tResenia>
-            <td><button type="button" class="btn btn-success" disabled>VER RESEÑA</button></td>
-          </ng-template>
 
         </tr>
       </tbody>
@@ -116,10 +105,12 @@
 </div>
 
 <div *ngIf="verFinalizarTurno">
-  <app-confirmar-con-mensaje-diagnostico [Titulo]="'FINALIZAR'" [subTitulo]="'DEJAR COMENTARIO O RESEÑA DEL TURNO A FINALIZAR'"
-  (eOpcion)="eventFinalizarTurno($event)" (eMensaje)="setMsj($event)"></app-confirmar-con-mensaje-diagnostico>
+  <app-confirmar-con-mensaje-diagnostico [Titulo]="'FINALIZAR'"
+    [subTitulo]="'DEJAR COMENTARIO O RESEÑA DEL TURNO A FINALIZAR'" (eOpcion)="eventFinalizarTurno($event)"
+    (eMensaje)="setMsj($event)"></app-confirmar-con-mensaje-diagnostico>
 </div>
 
 <div *ngIf="verReseniaTurno">
-  <app-mostrar-informacion-de-turno [Titulo]="'RESEÑA'" [subTitulo]="'OBSERVACIONES'" [Turno]='this.itemActual.turno' (eOpcion)="eventReseniaTurno($event)"></app-mostrar-informacion-de-turno>
+  <app-mostrar-informacion-de-turno [Titulo]="'RESEÑA'" [subTitulo]="'OBSERVACIONES'" [Turno]='this.itemActual.turno'
+    (eOpcion)="eventReseniaTurno($event)"></app-mostrar-informacion-de-turno>
 </div>

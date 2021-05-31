@@ -12,7 +12,7 @@ export class ValidarAdministradorGuard implements CanActivateChild {
 
     let rtn:boolean = false;
 
-    if(this.firebase.userData$.tipo == 'PROFESIONAL'){
+    if(this.firebase.userData$.tipo == 'ADMIN'){
       return true;
     }
 

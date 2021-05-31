@@ -24,10 +24,18 @@ export class MisTurnosPacienteComponent implements OnInit {
   verCancelarTurno: boolean = false;
   verReseniaTurno: boolean = false;
   verAtencionTurno:boolean = false;
+  verEncuestaTurno:boolean = false;
   //
   itemActual: any;
   msjAux: string = '';
+  auxEncuesta:any;
 
+  //ICONOS
+  iconoCalificar:string = '../../../../assets/Iconos/pCalificar.svg';
+  iconoCancelar:string = '../../../../assets/Iconos/pCancelar.svg';
+  iconoEncuesta:string = '../../../../assets/Iconos/pEncuesta.svg';
+  iconoResenia:string = '../../../../assets/Iconos/pResenia.svg';
+  //
   constructor(
     private router: Router,
     private firebase: FirebaseService,
@@ -91,6 +99,12 @@ export class MisTurnosPacienteComponent implements OnInit {
     this.verAtencionTurno = true;
   }
 
+  Encuesta(item:any){
+    this.verTabla = false;
+    this.itemActual = item;
+    this.verEncuestaTurno = true;
+  }
+
   eventCancelarTurno(event$) {
     setTimeout(() => {
       if (event$) {
@@ -126,12 +140,32 @@ export class MisTurnosPacienteComponent implements OnInit {
     }, 200);
   }
 
+  eventEncuestaTurno(event$) {
+    setTimeout(() => {
+      if (event$) {
+        this.itemActual.turno.encuesta = this.auxEncuesta;
+        this.firebase.Update_Turno(this.itemActual.turno);
+        this.verEncuestaTurno = false;
+        this.verTabla = true;
+
+        this.itemActual = [];
+      } else {
+        this.verEncuestaTurno = false;
+        this.verTabla = true;
+      }
+    }, 200);
+  }
+
   eventReseniaTurno(event$){
     if(!event$){
       this.verReseniaTurno = false;
       this.itemActual = [];
       this.verTabla = true;
     }
+  }
+
+  GetEncuesta(event$: any) {
+    this.auxEncuesta = event$;
   }
 
   setMsj(event$: string) {

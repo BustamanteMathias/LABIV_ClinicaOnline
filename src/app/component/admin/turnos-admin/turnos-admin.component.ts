@@ -22,10 +22,14 @@ export class TurnosAdminComponent implements OnInit {
   verTabla:boolean = true;
   verCancelarTurno:boolean = false;
 
+  //ICONOS
+  iconoCancelar:string = '../../../../assets/Iconos/pCancelar.svg';
   //
 
   msjAux:string = '';
   itemActual:any;
+
+  verSolicitarTurno:boolean = false;
 
   constructor(
     private router: Router,
@@ -81,6 +85,10 @@ export class TurnosAdminComponent implements OnInit {
     this.verCancelarTurno = true;
   }
 
+  SolicitarTurno(){
+    this.verSolicitarTurno = true;
+  }
+
   eventCancelarTurno(event$) {
     setTimeout(() => {
       if (event$) {
@@ -103,6 +111,9 @@ export class TurnosAdminComponent implements OnInit {
     this.msjAux = event$;
   }
 
+  Select(cadena:string){
+
+  }
   Volver() {
     this.router.navigate(['admin']);
   }

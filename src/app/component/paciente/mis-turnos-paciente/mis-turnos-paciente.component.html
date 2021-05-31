@@ -30,57 +30,59 @@
           <th scope="col">#</th>
           <th scope="col">PROFESIONAL</th>
           <th scope="col">ÁREA</th>
-          <th scope="col">DÍA</th>
-          <th scope="col">HORA</th>
+          <th scope="col">FECHA DE TURNO</th>
           <th scope="col">ESTADO</th>
-          <th scope="col">CANCELAR TURNO</th>
-          <th scope="col">VER RESEÑA</th>
-          <th scope="col">REALIZAR ENCUENTA</th>
-          <th scope="col">CALIFICAR ATENCIÓN</th>
+          <th scope="col">ACCIÓN</th>
         </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let item of this.listaDOM | filterUsuario:this.filterPost; let i=index ">
-            <th scope="row">{{i+1}}</th>
-            <td>{{item.profesional.apellido}}, {{item.profesional.nombre}}</td>
-            <td>{{item.turno.area}}</td>
-            <td>{{item.turno.fecha}}</td>
-            <td>{{item.turno.hora}}</td>
-            <td *ngIf="item.turno.estado == 'PENDIENTE'"><span class="badge bg-warning text-dark">{{item.turno.estado}}</span></td>
-            <td *ngIf="item.turno.estado == 'ACEPTADO'"><span class="badge bg-success">{{item.turno.estado}}</span></td>
-            <td *ngIf="item.turno.estado == 'CANCELADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
-            <td *ngIf="item.turno.estado == 'RECHAZADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
-            <td *ngIf="item.turno.estado == 'FINALIZADO'"><span class="badge bg-info text-dark">{{item.turno.estado}}</span></td>
+        <tr *ngFor="let item of this.listaDOM | filterUsuario:this.filterPost; let i=index ">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.profesional.apellido}}, {{item.profesional.nombre}}</td>
+          <td>{{item.turno.area}}</td>
+          <td>{{item.turno.fecha}} {{item.turno.hora}}</td>
+          <td *ngIf="item.turno.estado == 'PENDIENTE'"><span
+              class="badge bg-warning text-dark">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'ACEPTADO'"><span class="badge bg-success">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'CANCELADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'RECHAZADO'"><span class="badge bg-danger">{{item.turno.estado}}</span></td>
+          <td *ngIf="item.turno.estado == 'FINALIZADO'"><span
+              class="badge bg-info text-dark">{{item.turno.estado}}</span></td>
 
-            <ng-container *ngIf="item.turno.estado == 'PENDIENTE' || item.turno.estado == 'ACEPTADO'; else tCancelar">
-              <td><button type="button" class="btn btn-danger" (click)="Cancelar(item)">CANCELAR TURNO</button></td>
+          <td>
+            <ng-container *ngIf="item.turno.estado == 'PENDIENTE' || item.turno.estado == 'ACEPTADO';">
+              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="CANCELAR" style="margin-left: 0.5%;" (click)="Cancelar(item)">
+                <img src={{this.iconoCancelar}} style="width: 25px; height: 25px;">
+              </button>
             </ng-container>
-            <ng-template #tCancelar>
-              <td><button type="button" class="btn btn-danger" disabled>CANCELAR TURNO</button></td>
-            </ng-template>
 
-            <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != ''; else tResenia">
-              <td><button type="button" class="btn btn-primary" (click)="Resenia(item)">VER RESEÑA</button></td>
+            <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '';">
+              <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="VER RESEÑA" style="margin-left: 0.5%;" (click)="Resenia(item)">
+                <img src={{this.iconoResenia}} style="width: 25px; height: 25px;">
+              </button>
             </ng-container>
-            <ng-template #tResenia>
-              <td><button type="button" class="btn btn-primary" disabled>VER RESEÑA</button></td>
-            </ng-template>
 
-            <ng-container *ngIf="item.turno.estado == 'FINALIZADO' && (item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != ''); else tEncuesta">
-              <td><button type="button" class="btn btn-info">REALIZAR ENCUESTA</button></td>
+            <ng-container
+              *ngIf="item.turno.estado == 'FINALIZADO' && (item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '') && item.turno.encuesta.atencionRecibida == '';">
+              <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="REALIZAR ENCUESTA" style="margin-left: 0.5%;" (click)="Encuesta(item)">
+                <img src={{this.iconoEncuesta}} style="width: 25px; height: 25px;">
+              </button>
             </ng-container>
-            <ng-template #tEncuesta>
-              <td><button type="button" class="btn btn-info" disabled>REALIZAR ENCUESTA</button></td>
-            </ng-template>
 
-            <ng-container *ngIf="item.turno.estado == 'FINALIZADO'; else tAtencion">
-              <td><button type="button" class="btn btn-success" (click)="Atencion(item)">CALIFICAR ATENCIÓN</button></td>
+            <ng-container *ngIf="item.turno.comentarioPaciente == '';">
+              <ng-container *ngIf="item.turno.estado == 'FINALIZADO';">
+                <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="CALIFICAR ATENCIÓN" style="margin-left: 0.5%;" (click)="Atencion(item)">
+                  <img src={{this.iconoCalificar}} style="width: 25px; height: 25px;">
+                </button>
+              </ng-container>
             </ng-container>
-            <ng-template #tAtencion>
-              <td><button type="button" class="btn btn-success" disabled>CALIFICAR ATENCIÓN</button></td>
-            </ng-template>
 
-          </tr>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -92,10 +94,17 @@
 </div>
 
 <div *ngIf="verReseniaTurno">
-  <app-mostrar-informacion-de-turno [Titulo]="'RESEÑA'" [subTitulo]="'OBSERVACIONES'" [Turno]='this.itemActual.turno' (eOpcion)="eventReseniaTurno($event)"></app-mostrar-informacion-de-turno>
+  <app-mostrar-informacion-de-turno [Titulo]="'RESEÑA'" [subTitulo]="'OBSERVACIONES'" [Turno]='this.itemActual.turno'
+    (eOpcion)="eventReseniaTurno($event)"></app-mostrar-informacion-de-turno>
 </div>
 
 <div *ngIf="verAtencionTurno">
-  <app-confirmar-con-mensaje [Titulo]="'DEJAR LA ATENCIÓN RECIBIDA de'" [subTitulo]="'DEJAR LA ATENCIÓN RECIBIDA POR EL PROFESIONAL'"
-    (eOpcion)="eventAtencionTurno($event)" (eMensaje)="setMsj($event)"></app-confirmar-con-mensaje>
+  <app-confirmar-con-mensaje [Titulo]="'DEJAR LA ATENCIÓN RECIBIDA de'"
+    [subTitulo]="'DEJAR LA ATENCIÓN RECIBIDA POR EL PROFESIONAL'" (eOpcion)="eventAtencionTurno($event)"
+    (eMensaje)="setMsj($event)"></app-confirmar-con-mensaje>
+</div>
+
+<div *ngIf="verEncuestaTurno">
+  <app-encuesta-paciente (eOpcion)="eventEncuestaTurno($event)" (eMensaje)="GetEncuesta($event)">
+  </app-encuesta-paciente>
 </div>

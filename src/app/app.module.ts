@@ -36,8 +36,6 @@ import { PageRegisterComponent } from './page/page-register/page-register.compon
 import { CardPacienteComponent } from './component/varios/card-paciente/card-paciente.component';
 import { CardProfesionalComponent } from './component/varios/card-profesional/card-profesional.component';
 import { LoginUsuariosTestComponent } from './component/varios/login-usuarios-test/login-usuarios-test.component';
-import { PacienteComponent } from './page/paciente/paciente.component';
-import { ProfesionalComponent } from './page/profesional/profesional.component';
 import { MiPerfilProfesinalComponent } from './component/profesional/mi-perfil-profesinal/mi-perfil-profesinal.component';
 import { MiPerfilPacienteComponent } from './component/paciente/mi-perfil-paciente/mi-perfil-paciente.component';
 import { MiPerfilAdminComponent } from './component/admin/mi-perfil-admin/mi-perfil-admin.component';
@@ -58,6 +56,8 @@ import { ConfirmarConMensajeComponent } from './component/varios/confirmar-con-m
 import { ConfirmarConMensajeDiagnosticoComponent } from './component/varios/confirmar-con-mensaje-diagnostico/confirmar-con-mensaje-diagnostico.component';
 import { DiagnosticoComponent } from './component/varios/diagnostico/diagnostico.component';
 import { MostrarInformacionDeTurnoComponent } from './component/varios/mostrar-informacion-de-turno/mostrar-informacion-de-turno.component';
+import { FormatoEspecialidadesPipe } from './guard/formato-especialidades.pipe';
+import { EncuestaPacienteComponent } from './component/paciente/encuesta-paciente/encuesta-paciente.component';
 
 @NgModule({
   declarations: [
@@ -79,8 +79,6 @@ import { MostrarInformacionDeTurnoComponent } from './component/varios/mostrar-i
     CardPacienteComponent,
     CardProfesionalComponent,
     LoginUsuariosTestComponent,
-    PacienteComponent,
-    ProfesionalComponent,
     MiPerfilProfesinalComponent,
     MiPerfilPacienteComponent,
     MiPerfilAdminComponent,
@@ -100,7 +98,9 @@ import { MostrarInformacionDeTurnoComponent } from './component/varios/mostrar-i
     ConfirmarConMensajeComponent,
     ConfirmarConMensajeDiagnosticoComponent,
     DiagnosticoComponent,
-    MostrarInformacionDeTurnoComponent
+    MostrarInformacionDeTurnoComponent,
+    FormatoEspecialidadesPipe,
+    EncuestaPacienteComponent
   ],
   imports: [
     BrowserModule,

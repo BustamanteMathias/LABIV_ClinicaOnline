@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Turno } from '../../../model/turno';
@@ -25,7 +26,8 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
   constructor(
     private router: Router,
     private firebase: FirebaseService,
-    private context: AngularFireDatabase
+    private context: AngularFireDatabase,
+    private aStorage: AngularFireStorage
   ) {}
 
   @Input() EsAdmin: boolean = false;
@@ -45,7 +47,12 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
   //
 
   auxProfesional: any;
-
+  refFoto1: any;
+  refFoto2: any;
+  imgGeneral:string = '../../../../assets/general.png';
+  imgOculista:string = '../../../../assets/oculista.jpg';
+  imgDentista:string = '../../../../assets/dentista.png';
+  imgClinico:string = '../../../../assets/clinico.png';
   ngOnInit(): void {
     this.spinner = true;
     this.listaUsuarios = this.context.list('usuarios').valueChanges();
@@ -75,9 +82,28 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           });
         });
 
+        //TRAIGO URL DE FOTOS PROFESIONAL
+        this.listaProfesionales.forEach((p) => {
+          this.refFoto1 = this.aStorage.storage.ref().child(p.foto1);
+          this.refFoto1.getDownloadURL().then((url) => {
+            p.foto1 = url;
+          });
+        });
+
+        //TRAIGO URL DE FOTOS PACIENTES
+        this.listaPacientes.forEach((p) => {
+          this.refFoto1 = this.aStorage.storage.ref().child(p.foto1);
+          this.refFoto2 = this.aStorage.storage.ref().child(p.foto2);
+          this.refFoto1.getDownloadURL().then((url) => {
+            p.foto1 = url;
+          });
+          this.refFoto2.getDownloadURL().then((url) => {
+            p.foto2 = url;
+          });
+        });
       },
       (error) => {
-        console.log(error);
+        console.log({linea: '103', error: error});
       }
     );
 
@@ -88,13 +114,12 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
         this.listaTurnosDisponibles = response;
       },
       (error) => {
-        console.log(error);
+        console.log({linea: '114', error: error});
       }
     );
 
     setTimeout(() => {
       this.ObtenerTurnosDisponibles();
-      this.ArmarListaHorarios();
       this.spinner = false;
     }, 2000);
   }
@@ -132,12 +157,12 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
     this.auxProfesional = p;
     //
     this.idProfesional = p.id;
-    this.ObtenerTurnosDisponibles();
     this.ArmarListaHorarios();
     this.Ver(3);
   }
 
-  SetFechaHora(f: string, h: string) {
+  SetFechaHoraProfesion(f: string, h: string, p:string) {
+    this.areaEspecialidad = p;
     this.fecha = f;
     this.hora = h;
     this.Ver(4);
@@ -219,7 +244,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
         .Insert_Turno(t)
         .then(() => {})
         .catch((e) => {
-          console.log(e);
+          console.log({linea: '244', error: e});
         });
     } else {
       console.log('Error, usuario no autenticado');
@@ -253,6 +278,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           dia: 'LUNES',
           fecha: '',
           horarios: tLunes,
+          profesion: p.atiende[0].lunes.profesion,
         });
         //MARTES
         if (p.atiende[0].martes.estado == true) {
@@ -271,6 +297,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           dia: 'MARTES',
           fecha: '',
           horarios: tMartes,
+          profesion: p.atiende[0].martes.profesion,
         });
         //MIERCOLES
         if (p.atiende[0].miercoles.estado == true) {
@@ -289,6 +316,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           dia: 'MIERCOLES',
           fecha: '',
           horarios: tMiercoles,
+          profesion: p.atiende[0].miercoles.profesion,
         });
         //JUEVES
         if (p.atiende[0].jueves.estado == true) {
@@ -307,6 +335,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           dia: 'JUEVES',
           fecha: '',
           horarios: tJueves,
+          profesion: p.atiende[0].jueves.profesion,
         });
         //VIERNES
         if (p.atiende[0].viernes.estado == true) {
@@ -325,6 +354,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           dia: 'VIERNES',
           fecha: '',
           horarios: tViernes,
+          profesion: p.atiende[0].viernes.profesion,
         });
         //SABADO
         if (p.atiende[0].sabado.estado == true) {
@@ -343,6 +373,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
           dia: 'SABADO',
           fecha: '',
           horarios: tSabado,
+          profesion: p.atiende[0].sabado.profesion,
         });
       }
     });
@@ -390,6 +421,7 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
         dia: this.listaHorariosDisponibles[index].dia,
         fecha: auxFecha[index],
         horarios: this.listaHorariosDisponibles[index].horarios,
+        profesion: this.listaHorariosDisponibles[index].profesion
       });
     }
     this.listaHorariosDisponibles = [...nuevoArray];
@@ -422,17 +454,17 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
       }
     });
 
-    //ME QUEDO CON LOS PROXIMOS 15 DIAS
-    if (this.listaHorariosDisponibles.length > 16) {
-      let aux: any[] = [];
-
-      for (let index = 1; index < 16; index++) {
-        const element = this.listaHorariosDisponibles[index];
-        aux.push(element);
+    let aux:any[] = [];
+    let flag = 0;
+    for (const item of this.listaHorariosDisponibles) {
+      if(aux.length < 12 && flag == 1){
+        aux.push(item);
       }
-
-      this.listaHorariosDisponibles = aux;
+      flag = 1;
     }
+
+    this.listaHorariosDisponibles = [];
+    this.listaHorariosDisponibles = aux;
   }
 
   SumarFecha(cantDias: number): string {

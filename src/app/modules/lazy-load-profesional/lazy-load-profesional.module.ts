@@ -12,7 +12,7 @@ import { HorariosComponent } from 'src/app/component/profesional/horarios/horari
 const routes: Routes = [
   {
     path: '',
-    canActivateChild: [ValidarProfesionalGuard],
+    //canActivateChild: [ValidarProfesionalGuard],
     children: [
       { path: '', redirectTo: 'mi-perfil', pathMatch: "full" },
       { path: 'mi-perfil', component: MiPerfilProfesinalComponent },

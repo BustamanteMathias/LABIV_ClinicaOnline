@@ -31,6 +31,14 @@ export class MisTurnosProfesionalComponent implements OnInit {
   itemActual:any;
   msjAux:string = '';
 
+  //ICONOS
+  iconoCancelar:string = '../../../../assets/Iconos/pCancelar.svg';
+  iconoRechazar:string = '../../../../assets/Iconos/pRechazar.svg';
+  iconoAceptar:string = '../../../../assets/Iconos/pAceptar.svg';
+  iconoFinalizar:string = '../../../../assets/Iconos/pFinalizar.svg';
+  iconoResenia:string = '../../../../assets/Iconos/pResenia.svg';
+  //
+
   constructor(private router: Router,
     private firebase: FirebaseService,
     private context: AngularFireDatabase) { }

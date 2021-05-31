@@ -10,19 +10,23 @@
 </nav>
 
 <!-- PACIENTE (SOLO PARA ADMIN) -->
-<div class="card" style="margin-top: 5%;" *ngIf="this.EsAdmin == true">
-  <div class="card-body contenedor">
-    <h1>SELECCIONAR PACIENTE</h1>
-    <br><br>
+<div *ngIf="this.verPacientes">
+  <div class="card" style="margin-top: 5%;" *ngIf="this.EsAdmin == true">
+    <div class="card-body contenedor">
+      <h1>SELECCIONAR PACIENTE</h1>
+      <br><br>
 
-    <div class="btn-group-vertical contenedor">
-      <div *ngFor="let p of this.listaPacientes">
-        <button type="button" class="btn btn-outline-dark" (click)="this.SetPaciente(p)">
-          <h3>{{p.apellido}}, {{p.nombre}}</h3>
-        </button><br><br>
+      <div class="btn-group-vertical contenedor">
+        <div *ngFor="let p of this.listaPacientes">
+          <button type="button" class="btn btn-outline-dark" (click)="this.SetPaciente(p)">
+            <img src={{this.p.foto1}} class="rounded-circle border border-info" width="50" height="50">
+            <img src={{this.p.foto2}} class="rounded-circle border border-info" width="50" height="50">
+            <span>   <strong>PACIENTE: </strong>{{p.apellido}}, {{p.nombre}}.</span>
+          </button><br><br>
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 
@@ -30,13 +34,15 @@
 <div *ngIf="this.verEspecialidades">
   <div class="card" style="margin-top: 5%;">
     <div class="card-body contenedor">
-      <h1>SELECCIONAR ESPECIALIDAD</h1>
+      <h1>SELECCIONAR PROFESIONAL</h1>
       <br><br>
 
       <div class="btn-group-vertical contenedor">
-        <div *ngFor="let e of this.listaEspecialidades">
-          <button type="button" class="btn btn-outline-dark" (click)="this.SetEspecialidad(e)">
-            <h3>{{e}}</h3>
+        <div *ngFor="let e of this.listaProfesionales">
+          <button type="button" class="btn btn-outline-dark" (click)="this.SetProfesional(e)">
+            <img src={{this.e.foto1}} class="rounded-circle border border-info" width="50" height="50">
+            <span>   <strong>DR./DRA.: </strong>{{e.apellido}}, {{e.nombre}}. <strong>ESPECIALIDADES:
+              </strong>{{(e.especialidades) | formatoEspecialidades}}</span>
           </button><br><br>
         </div>
       </div>
@@ -71,16 +77,26 @@
       <h1>SELECCIONAR HORARIO DISPONIBLE</h1>
       <br><br>
 
-        <div *ngFor="let l of this.listaHorariosDisponibles">
-           <strong><p>{{l.dia}} {{l.fecha}}</p></strong>
+      <div *ngFor="let l of this.listaHorariosDisponibles; let i = index">
+        <div *ngIf="i < 11">
+          <strong>
+            <p>{{l.dia}} {{l.fecha}}</p>
+          </strong>
 
-           <div class="btn-group btn-group-sm" role="group">
-            <div *ngFor="let h of l.horarios">
-              <button type="button" class="btn btn-outline-dark" style="width: 100px;" (click)="this.SetFechaHora(l.fecha, h)"><h5>{{h}}</h5></button>
+          <div class="btn-group btn-group-sm" role="group">
+            <div *ngFor="let h of l.horarios" style="margin-right: 0.5%;">
+              <button type="button" class="btn btn-outline-dark" style="width: 100px;" (click)="this.SetFechaHoraProfesion(l.fecha, h, l.profesion)">
+                <img src={{this.imgDentista}} class="rounded-circle border border-info" width="50" height="50" *ngIf="l.profesion == 'DENTISTA'">
+                <img src={{this.imgOculista}} class="rounded-circle border border-info" width="50" height="50" *ngIf="l.profesion == 'OCULISTA'">
+                <img src={{this.imgClinico}} class="rounded-circle border border-info" width="50" height="50" *ngIf="l.profesion == 'CLINICO'">
+                <img src={{this.imgGeneral}} class="rounded-circle border border-info" width="50" height="50" *ngIf="l.profesion != 'DENTISTA' && l.profesion != 'CLINICO' && l.profesion != 'OCULISTA'">
+                <span>{{h}}<br>{{l.profesion}}</span>
+              </button>
             </div>
-           </div>
-           <br><br>
+          </div>
+          <br><br>
         </div>
+      </div>
 
     </div>
   </div>
@@ -98,9 +114,12 @@
           <h3>¿Seguro que desea <strong>CONFIRMAR</strong> el turno?</h3>
           <div class="card-body">
             <img src="../../../assets/Iconos/cosito.svg" class="iconos">
-            <span class="card-text">&nbsp;&nbsp;<strong>[PROFESIONAL]&nbsp;&nbsp;</strong><br>{{this.auxProfesional.apellido}}, {{this.auxProfesional.nombre}}</span><br><br>
+            <span
+              class="card-text">&nbsp;&nbsp;<strong>[PROFESIONAL]&nbsp;&nbsp;</strong><br>{{this.auxProfesional.apellido}},
+              {{this.auxProfesional.nombre}}</span><br><br>
             <img src="../../../assets/Iconos/first-aid-solid.svg" class="iconos">
-            <span class="card-text">&nbsp;&nbsp;<strong>[ESPECIALIDAD]&nbsp;&nbsp;</strong><br>{{this.areaEspecialidad}}</span><br><br>
+            <span
+              class="card-text">&nbsp;&nbsp;<strong>[ESPECIALIDAD]&nbsp;&nbsp;</strong><br>{{this.areaEspecialidad}}</span><br><br>
             <img src="../../../assets/Iconos/calendar.svg" class="iconos">
             <span class="card-text">&nbsp;&nbsp;<strong>[DIA]&nbsp;&nbsp;</strong><br>{{this.fecha}}</span><br><br>
             <img src="../../../assets/Iconos/clock.svg" class="iconos">
