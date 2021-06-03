@@ -68,6 +68,8 @@ export class EncuestaPacienteComponent implements OnInit {
       }else{
         this.verError = true;
       }
+    }else{
+      this.eOpcion.emit(opcion);
     }
   }
 }
