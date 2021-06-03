@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
+import { element } from 'protractor';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/service/firebase.service';
 
@@ -58,34 +59,39 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
         console.log(error);
       }
     );
-
     setTimeout(() => {
+
       this.listaTotalTurnos.forEach((turno) => {
-        this.listaPaciente.forEach((paciente) => {
-          if (turno.idPaciente == paciente.id) {
-            this.listaProfesional.forEach((profesional) => {
-              if (turno.idPaciente == paciente.id) {
-                this.listaAux.push({
-                  turno: turno,
-                  paciente: paciente,
-                  profesional: profesional,
-                });
-              }
-            });
+        let y,x = '';
+        for (const item of this.listaPaciente) {
+          if(item.id == turno.idPaciente){
+            y = item;
           }
-        });
+        }
+        for (const item of this.listaProfesional) {
+          if(item.id == turno.idProfesional){
+            x = item;
+          }
+        }
+
+        if(y != '' && x != ''){
+          this.listaAux.push({
+            turno: turno,
+            paciente: y,
+            profesional: x,
+          });
+        }
       });
 
       if (this.firebase.userData$.tipo == 'PACIENTE') {
         this.listaAux = this.listaAux.filter(
-          (elemet) => elemet.turno.idPaciente == this.firebase.userData$.id
+          (elemet) => elemet.turno.idPaciente == this.firebase.userData$.id && elemet.turno.estado == 'FINALIZADO'
         );
       } else if (this.firebase.userData$.tipo == 'PROFESIONAL') {
         this.listaAux = this.listaAux.filter(
-          (elemet) => elemet.turno.idProfesional == this.firebase.userData$.id
+          (elemet) => elemet.turno.idProfesional == this.firebase.userData$.id && elemet.turno.estado == 'FINALIZADO'
         );
       }
-
       this.listaAux.forEach((elemento) => {
         if (!this.listaAuxFiltro.includes(elemento.paciente)) {
           this.listaAuxFiltro.push(elemento.paciente);
@@ -104,12 +110,11 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
   }
 
   Filtrar(paciente: any) {
-    console.log(paciente);
-    console.log(this.listaAux);
     console.log(this.listaAuxTurno);
     this.listaAuxTurno = this.listaAux.filter(
       (elemento) => elemento.paciente.id == paciente.id
     );
+    console.log(this.listaAuxTurno);
     this.verFolder = false;
   }
 
