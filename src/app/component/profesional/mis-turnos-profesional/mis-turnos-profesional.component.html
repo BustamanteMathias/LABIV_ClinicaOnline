@@ -107,7 +107,7 @@
 <div *ngIf="verFinalizarTurno">
   <app-confirmar-con-mensaje-diagnostico [Titulo]="'FINALIZAR'"
     [subTitulo]="'DEJAR COMENTARIO O RESEÑA DEL TURNO A FINALIZAR'" (eOpcion)="eventFinalizarTurno($event)"
-    (eMensaje)="setMsj($event)"></app-confirmar-con-mensaje-diagnostico>
+    (eMensaje)="setMsj($event)" (eDiagnostico)="eventDignosticoTurno($event)"></app-confirmar-con-mensaje-diagnostico>
 </div>
 
 <div *ngIf="verReseniaTurno">

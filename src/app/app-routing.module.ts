@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { Error404Component } from "./component/error404/error404.component";
-import { EncuestaPacienteComponent } from './component/paciente/encuesta-paciente/encuesta-paciente.component';
 import { BienvenidaComponent } from "./page/bienvenida/bienvenida.component";
 import { PageLoginComponent } from "./page/page-login/page-login.component";
 import { PageRegisterComponent } from "./page/page-register/page-register.component";
+import { HorariosComponent } from './component/profesional/horarios/horarios.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenido', pathMatch: "full" },
@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import ('./modules/lazy-load-profesional/modulo-profesional.module').then(m => m.ModuloProfesionalModule)
   },
   { path: 'error404', component: Error404Component },
-  { path: 'test', component: EncuestaPacienteComponent },
+  { path: 'test', component: HorariosComponent },
   { path: '**', component: Error404Component },
 ];
 

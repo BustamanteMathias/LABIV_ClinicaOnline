@@ -79,7 +79,7 @@
 
       <div *ngFor="let l of this.listaHorariosDisponibles; let i = index">
         <div *ngIf="i < 11">
-          <strong>
+          <strong *ngIf="l.horarios.length != 0">
             <p>{{l.dia}} {{l.fecha}}</p>
           </strong>
 

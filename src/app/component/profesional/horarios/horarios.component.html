@@ -1,1 +1,86 @@
-<p>horarios works!</p>
+<h1 style="text-align: center;">GESTIONAR HORARIOS</h1>
+<div class="padre">
+
+  <div class="card" [@animacionMenu]>
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center; width: 50rem;">MARCAR DISPONIBILIDAD HORARIA</h5>
+      <br>
+      <div class="row">
+        <div class="col">
+          <strong>SELECCIONAR DÍA</strong>
+        </div>
+        <div class="col">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="this.sDia">
+            <option value="LUNES">LUNES</option>
+            <option value="MARTES">MARTES</option>
+            <option value="MIERCOLES">MIÉRCOLES</option>
+            <option value="JUEVES">JUEVES</option>
+            <option value="VIERNES">VIERNES</option>
+            <option value="SABADO">SÁBADO</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-check form-switch" style="text-align: center; margin-top: 1%;">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="this.checked"
+          (click)="HabilitarDeshabilitar()">
+        <label class="form-check-label" for="flexSwitchCheckChecked">{{this.habDes}}</label>
+      </div>
+
+      <li class="dropdown-divider"></li>
+
+      <ng-container *ngIf="this.checked; else elseTemplate">
+        <div class="row">
+          <div class="col">
+            <label for="selectInicio"><strong>INICIO</strong> DE TURNO</label>
+            <select class="form-select" name="selectInicio" [(ngModel)]="this.inicio">
+              <option value=800>8:00</option>
+              <option value=900>9:00</option>
+              <option value=1000>10:00</option>
+              <option value=1100>11:00</option>
+              <option value=1200>12:00</option>
+              <option value=1300>13:00</option>
+              <option value=1400>14:00</option>
+              <option value=1500>15:00</option>
+              <option value=1600>16:00</option>
+              <option value=1700>17:00</option>
+              <option value=1800>18:00</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="selectFin"><strong>FIN</strong> DE TURNO</label>
+            <select class="form-select" name="selectFin" [(ngModel)]="this.fin">
+              <option value=800>8:00</option>
+              <option value=900>9:00</option>
+              <option value=1000>10:00</option>
+              <option value=1100>11:00</option>
+              <option value=1200>12:00</option>
+              <option value=1300>13:00</option>
+              <option value=1400>14:00</option>
+              <option value=1500>15:00</option>
+              <option value=1600>16:00</option>
+              <option value=1700>17:00</option>
+              <option value=1800>18:00</option>
+              <option value=1900>19:00</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="selectProf"><strong>EJERCE</strong> USTED</label>
+            <select class="form-select" name="selectFin" [(ngModel)]="this.profesion">
+              <option value={{profesion}} *ngFor="let profesion of this.listaEspecialidades" selected>{{profesion}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p style="text-align: center;">DÍA NO LABORAL</p>
+      </ng-template>
+
+      <br>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-success" type="button" (click)='SetHorario(true)'>GUARDAR CAMBIOS</button>
+        <button class="btn btn-danger" type="button" (click)='SetHorario(false)'>VOLVER</button>
+      </div>
+    </div>
+  </div>
+</div>

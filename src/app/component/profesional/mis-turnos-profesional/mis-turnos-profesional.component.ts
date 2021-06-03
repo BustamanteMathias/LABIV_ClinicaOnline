@@ -30,6 +30,7 @@ export class MisTurnosProfesionalComponent implements OnInit {
 
   itemActual:any;
   msjAux:string = '';
+  hClinica:any;
 
   //ICONOS
   iconoCancelar:string = '../../../../assets/Iconos/pCancelar.svg';
@@ -175,6 +176,7 @@ export class MisTurnosProfesionalComponent implements OnInit {
     setTimeout(() => {
       if(event$){
         this.itemActual.turno.comentarioProfesional = this.msjAux;
+        this.itemActual.turno.historiaClinica = this.hClinica;
         this.itemActual.turno.estado = 'FINALIZADO';
         this.firebase.Update_Turno(this.itemActual.turno);
         this.verFinalizarTurno = false;
@@ -196,6 +198,10 @@ export class MisTurnosProfesionalComponent implements OnInit {
       this.itemActual = [];
       this.verTabla = true;
     }
+  }
+
+  eventDignosticoTurno(event$){
+    this.hClinica = event$;
   }
 
   VolverPaciente() {

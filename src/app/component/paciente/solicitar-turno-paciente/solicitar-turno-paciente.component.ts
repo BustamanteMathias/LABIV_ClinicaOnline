@@ -465,6 +465,8 @@ export class SolicitarTurnoPacienteComponent implements OnInit {
 
     this.listaHorariosDisponibles = [];
     this.listaHorariosDisponibles = aux;
+
+    console.log(this.listaHorariosDisponibles);
   }
 
   SumarFecha(cantDias: number): string {
