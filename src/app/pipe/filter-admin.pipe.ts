@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterProfesional'
+  name: 'filterAdmin'
 })
-export class FilterProfesionalPipe implements PipeTransform {
+export class FilterAdminPipe implements PipeTransform {
 
   transform(value: any, arg: any): any {
     const resultPost = [];
@@ -17,6 +17,10 @@ export class FilterProfesionalPipe implements PipeTransform {
           post.paciente.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
           //APELLIDO
           post.paciente.apellido.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
+          //NOMBRE
+          post.profesional.nombre.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
+          //APELLIDO
+          post.profesional.apellido.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
           //AREA
           post.turno.area.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
           //FECHA
@@ -46,6 +50,7 @@ export class FilterProfesionalPipe implements PipeTransform {
           post.turno.historiaClinica.datosGenerico[1].valor.toLowerCase().indexOf(arg.toLowerCase()) > -1 ||
           //DESC3
           post.turno.historiaClinica.datosGenerico[2].valor.toLowerCase().indexOf(arg.toLowerCase()) > -1
+
         ) {
           resultPost.push(post);
         }

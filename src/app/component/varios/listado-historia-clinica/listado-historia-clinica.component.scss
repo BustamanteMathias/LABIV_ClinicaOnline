@@ -1,0 +1,28 @@
+.modalDialog {
+  pointer-events: auto;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.692);
+  background: -moz-linear-gradient(#fff, #999);
+  background: -webkit-linear-gradient(#fff, #999);
+  background: -o-linear-gradient(#fff, #999);
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+}
+
+
+.estiloTabla {
+  width: 70vw;
+  height: 70vh;
+  overflow-y: scroll;
+  margin-left: 15vw;
+  margin-top: 5%;
+  background-color: white;
+}

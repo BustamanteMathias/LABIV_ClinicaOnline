@@ -12,7 +12,7 @@ import { SeccionUsuariosComponent } from '../../page/seccion-usuarios/seccion-us
 const routes: Routes = [
   {
     path: '',
-    //canActivateChild: [ValidarAdministradorGuard],
+    canActivateChild: [ValidarAdministradorGuard],
     children: [
       { path: '', redirectTo: 'mi-perfil', pathMatch: "full" },
       { path: 'mi-perfil', component: MiPerfilAdminComponent},

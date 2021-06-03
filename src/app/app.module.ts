@@ -58,6 +58,9 @@ import { DiagnosticoComponent } from './component/varios/diagnostico/diagnostico
 import { MostrarInformacionDeTurnoComponent } from './component/varios/mostrar-informacion-de-turno/mostrar-informacion-de-turno.component';
 import { FormatoEspecialidadesPipe } from './guard/formato-especialidades.pipe';
 import { EncuestaPacienteComponent } from './component/paciente/encuesta-paciente/encuesta-paciente.component';
+import { VerHistoriaClinicaComponent } from './component/varios/ver-historia-clinica/ver-historia-clinica.component';
+import { ListadoHistoriaClinicaComponent } from './component/varios/listado-historia-clinica/listado-historia-clinica.component';
+import { FilterAdminPipe } from './pipe/filter-admin.pipe';
 
 @NgModule({
   declarations: [
@@ -100,7 +103,10 @@ import { EncuestaPacienteComponent } from './component/paciente/encuesta-pacient
     DiagnosticoComponent,
     MostrarInformacionDeTurnoComponent,
     FormatoEspecialidadesPipe,
-    EncuestaPacienteComponent
+    EncuestaPacienteComponent,
+    VerHistoriaClinicaComponent,
+    ListadoHistoriaClinicaComponent,
+    FilterAdminPipe
   ],
   imports: [
     BrowserModule,

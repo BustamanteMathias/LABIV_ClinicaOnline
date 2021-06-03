@@ -1,0 +1,175 @@
+<span [ngSwitch]="this.tipoUsuario">
+  <h1 style="text-align: center; margin-top: 5%;">HISTORIAS CLÍNICAS</h1><br><br>
+  <div *ngSwitchCase="'PACIENTE'">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="cursor: pointer"><strong>HISTORIAL</strong></a>
+        <div>
+          <div class="d-flex">
+            <button class="btn btn-outline-warning"
+              (click)="Volver('/paciente/mi-perfil')"><strong>VOLVER</strong></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <table class="table" style="width: 70vw; margin-left: 15vw;">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">PROFESIONAL</th>
+          <th scope="col">FECHA/HORA</th>
+          <th scope="col">AREA</th>
+          <th scope="col">ACCION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of this.listaAux; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{t.profesional.apellido}}, {{t.profesional.nombre}}</td>
+          <td>{{t.turno.fecha}} {{t.turno.hora}}</td>
+          <td>{{t.turno.area}}</td>
+          <td>
+            <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="VER HISTORIA CLÍNICA" style="margin-left: 0.5%;"
+              (click)="VerHistoriaClinica(t.turno.historiaClinica)">
+              <img src={{this.iconoHistoriaClinica}} style="width: 25px; height: 25px;">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngSwitchCase="'PROFESIONAL'">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="cursor: pointer"><strong>HISTORIAL</strong></a>
+        <div>
+          <div class="d-flex">
+            <button class="btn btn-outline-warning"
+              (click)="Volver('/profesional/mi-perfil')"><strong>VOLVER</strong></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div *ngIf="this.verFolder == true">
+      <span *ngFor="let paciente of this.listaAuxFiltro">
+        <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+          title="VER HISTORIAS CLÍNICAS" style="margin-left: 1%;" id="btn" name="btn" (click)="Filtrar(paciente)">
+          <img src={{this.iconoFolder}} style="width: 100px; height: 100px;">
+        </button>
+        <label for="btn">{{paciente.apellido}}, {{paciente.nombre}}</label>
+      </span>
+    </div>
+    <div *ngIf="this.verFolder == false">
+      <div class="modalDialog">
+        <div class="card estiloTabla">
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">PACIENTE</th>
+                  <th scope="col">FECHA/HORA</th>
+                  <th scope="col">AREA</th>
+                  <th scope="col">ACCION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let t of this.listaAuxTurno; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{t.paciente.apellido}}, {{t.paciente.nombre}}</td>
+                  <td>{{t.turno.fecha}} {{t.turno.hora}}</td>
+                  <td>{{t.turno.area}}</td>
+                  <td>
+                    <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="VER HISTORIA CLÍNICA" style="margin-left: 0.5%;"
+                      (click)="VerHistoriaClinica(t.turno.historiaClinica)">
+                      <img src={{this.iconoHistoriaClinica}} style="width: 25px; height: 25px;">
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-danger" type="button" (click)="Cerrar()">CERRAR</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div *ngSwitchCase="'ADMIN'">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="cursor: pointer"><strong>HISTORIAL</strong></a>
+        <div>
+          <div class="d-flex">
+            <button class="btn btn-outline-warning"
+              (click)="Volver('/admin/mi-perfil')"><strong>VOLVER</strong></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div *ngIf="this.verFolder == true">
+      <span *ngFor="let paciente of this.listaAuxFiltro">
+        <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+          title="VER HISTORIAS CLÍNICAS" style="margin-left: 1%;" id="btn" name="btn" (click)="Filtrar(paciente)">
+          <img src={{this.iconoFolder}} style="width: 100px; height: 100px;">
+        </button>
+        <label for="btn">{{paciente.apellido}}, {{paciente.nombre}}</label>
+      </span>
+    </div>
+    <div *ngIf="this.verFolder == false">
+      <div class="modalDialog">
+        <div class="card estiloTabla">
+          <div class="card-body">
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">PACIENTE</th>
+                  <th scope="col">PROFESIONAL</th>
+                  <th scope="col">FECHA/HORA</th>
+                  <th scope="col">AREA</th>
+                  <th scope="col">ACCION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let t of this.listaAuxTurno; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{t.paciente.apellido}}, {{t.paciente.nombre}}</td>
+                  <td>{{t.profesional.apellido}}, {{t.profesional.nombre}}</td>
+                  <td>{{t.turno.fecha}} {{t.turno.hora}}</td>
+                  <td>{{t.turno.area}}</td>
+                  <td>
+                    <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="VER HISTORIA CLÍNICA" style="margin-left: 0.5%;"
+                      (click)="VerHistoriaClinica(t.turno.historiaClinica)">
+                      <img src={{this.iconoHistoriaClinica}} style="width: 25px; height: 25px;">
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br><br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-danger" type="button" (click)="Cerrar()">CERRAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</span>
+
+<div *ngIf="this.verComponentHistoria">
+  <app-ver-historia-clinica [hClinica]='this.item' (Ver)="CerrarHistoriaClinica($event)"></app-ver-historia-clinica>
+</div>

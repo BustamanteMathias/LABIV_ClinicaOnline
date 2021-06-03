@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { FirebaseService } from '../../service/firebase.service';
 
 @Component({
   selector: 'app-seccion-usuarios',

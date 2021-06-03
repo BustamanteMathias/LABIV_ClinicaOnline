@@ -45,7 +45,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of this.listaDOM | filterUsuario:this.filterPost; let i=index ">
+          <tr *ngFor="let item of this.listaDOM | filterAdmin:this.filterPost; let i=index ">
             <th scope="row">{{i+1}}</th>
             <td>{{item.profesional.apellido}}, {{item.profesional.nombre}}</td>
             <td>{{item.paciente.apellido}}, {{item.paciente.nombre}}</td>

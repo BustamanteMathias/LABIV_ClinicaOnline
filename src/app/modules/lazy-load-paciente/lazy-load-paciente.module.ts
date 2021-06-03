@@ -12,7 +12,7 @@ import { HistorialComponent } from '../../component/paciente/historial/historial
 const routes: Routes = [
   {
     path: '',
-    //canActivateChild: [ValidarPacienteGuard],
+    canActivateChild: [ValidarPacienteGuard],
     children: [
       { path: '', redirectTo: 'mi-perfil', pathMatch: "full" },
       { path: 'mi-perfil', component: MiPerfilPacienteComponent },

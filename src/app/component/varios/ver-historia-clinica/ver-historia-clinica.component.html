@@ -1,0 +1,50 @@
+<div class="modalDialog" *ngIf="this.Ver">
+  <div class="card posicion" style="width: 50rem; text-align: center;" [@animacionMenu]>
+    <div class="card-body">
+      <div class="mb-3">
+      </div>
+      <!-- DIAGNOSTICO -->
+      <h4><strong>VISUALIZADOR DE HISTORIA CLÍNICA</strong></h4><br>
+      <strong>DATOS</strong><br>
+      <div class="row">
+        <div class="col">
+          <span>ALTURA </span>
+          <input type="number" id="tentacles" name="tentacles" min="0.1" max="3" step="0.1" value="1.8" style="color: blue;" [(ngModel)]="this.hClinica.altura" disabled>
+          <span> PESO </span>
+          <input type="number" id="tentacles" name="tentacles" min="1" max="200" step="0.1" value="80" style="color: blue;" [(ngModel)]="this.hClinica.peso" disabled>
+        </div>
+        <div class="col">
+          <span>TEMP </span>
+          <input type="number" id="tentacles" name="tentacles" min="35" max="41" step="0.1" value="36.5" style="color: blue;" [(ngModel)]="this.hClinica.temperatura" disabled>
+          <span> PRESIÓN </span>
+          <input type="number" id="tentacles" name="tentacles" min="60" max="180" step="1" value="80" style="color: blue;" [(ngModel)]="this.hClinica.presion" disabled>
+        </div>
+      </div>
+      <br>
+      <strong>OTRAS OBSERVACIONES</strong>
+      <div *ngIf="this.hClinica.datosGenerico[0].clave == '' && this.hClinica.datosGenerico[1].clave == '' && this.hClinica.datosGenerico[2].clave == ''">
+        <p style="text-align: center;">[ NINGUNA ]</p>
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="col">
+          <input *ngIf="this.hClinica.datosGenerico[0].clave != ''" type="text" class="form-control" placeholder="DATO 1" aria-label="First name" style="margin: 1.5%;" [(ngModel)]='this.hClinica.datosGenerico[0].clave' disabled>
+          <input *ngIf="this.hClinica.datosGenerico[1].clave != ''" type="text" class="form-control" placeholder="DATO 2" aria-label="First name" style="margin: 1.5%;" [(ngModel)]='this.hClinica.datosGenerico[1].clave' disabled>
+          <input *ngIf="this.hClinica.datosGenerico[2].clave != ''" type="text" class="form-control" placeholder="DATO 3" aria-label="First name" style="margin: 1.5%;" [(ngModel)]='this.hClinica.datosGenerico[2].clave' disabled>
+        </div>
+        <div class="col">
+          <input *ngIf="this.hClinica.datosGenerico[0].clave != ''" type="text" class="form-control" placeholder="DESCRIPCIÓN 1" aria-label="Last name" style="margin: 1.5%;" [(ngModel)]='this.hClinica.datosGenerico[0].valor' disabled>
+          <input *ngIf="this.hClinica.datosGenerico[1].clave != ''" type="text" class="form-control" placeholder="DESCRIPCIÓN 2" aria-label="Last name" style="margin: 1.5%;" [(ngModel)]='this.hClinica.datosGenerico[1].valor' disabled>
+          <input *ngIf="this.hClinica.datosGenerico[2].clave != ''" type="text" class="form-control" placeholder="DESCRIPCIÓN 3" aria-label="Last name" style="margin: 1.5%;" [(ngModel)]='this.hClinica.datosGenerico[2].valor' disabled>
+          <br>
+        </div>
+      </div>
+      <!-- FIN DIAGNOSTICO-->
+
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-danger" type="button" (click)="Cerrar()">CERRAR</button>
+      </div>
+    </div>
+  </div>
+
+</div>

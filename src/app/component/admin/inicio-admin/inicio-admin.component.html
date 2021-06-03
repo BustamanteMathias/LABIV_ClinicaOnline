@@ -2,10 +2,17 @@
   <div class="col">
 
     <div style="text-align: center;">
-      <br> <h2>LISTADO DE PACIENTES</h2> <br>
+      <br>
+      <h2>LISTADO DE PACIENTES</h2>
+      <span type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+        title="DESCARGAR LISTA DE PACIENTES"
+        (click)="ExportExcel('ListadoPacientes.xlsx', 'excel-tabla-pacientes')">
+        <img src={{this.iconoDescarga}} style="width: 25px; height: 25px; text-align: center;">
+      </span>
     </div>
+    <br>
 
-    <table class="table">
+    <table class="table" id="excel-tabla-pacientes">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -32,10 +39,16 @@
   <div class="col">
 
     <div style="text-align: center;">
-      <br> <h2>LISTADO DE PROFESIONALES</h2> <br>
+      <br>
+      <h2>LISTADO DE PROFESIONALES</h2>
+      <span type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+        title="DESCARGAR LISTA DE PROFESIONALES"
+        (click)="ExportExcel('ListadoProfesionales.xlsx', 'excel-tabla-profesionales')">
+        <img src={{this.iconoDescarga}} style="width: 25px; height: 25px; text-align: center;">
+      </span>
     </div>
-
-    <table class="table">
+    <br>
+    <table class="table" id="excel-tabla-profesionales">
       <thead>
         <tr>
           <th scope="col">#</th>
