@@ -14,7 +14,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FirebaseService } from "./service/firebase.service";
 import { environment } from "../environments/environment";
 
-
+import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -54,13 +54,13 @@ import { TurnosAdminComponent } from './component/admin/turnos-admin/turnos-admi
 import { ConfirmarComponent } from './component/varios/confirmar/confirmar.component';
 import { ConfirmarConMensajeComponent } from './component/varios/confirmar-con-mensaje/confirmar-con-mensaje.component';
 import { ConfirmarConMensajeDiagnosticoComponent } from './component/varios/confirmar-con-mensaje-diagnostico/confirmar-con-mensaje-diagnostico.component';
-import { DiagnosticoComponent } from './component/varios/diagnostico/diagnostico.component';
 import { MostrarInformacionDeTurnoComponent } from './component/varios/mostrar-informacion-de-turno/mostrar-informacion-de-turno.component';
 import { FormatoEspecialidadesPipe } from './guard/formato-especialidades.pipe';
 import { EncuestaPacienteComponent } from './component/paciente/encuesta-paciente/encuesta-paciente.component';
 import { VerHistoriaClinicaComponent } from './component/varios/ver-historia-clinica/ver-historia-clinica.component';
 import { ListadoHistoriaClinicaComponent } from './component/varios/listado-historia-clinica/listado-historia-clinica.component';
 import { FilterAdminPipe } from './pipe/filter-admin.pipe';
+import { EstadisticasComponent } from './component/admin/estadisticas/estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -100,13 +100,13 @@ import { FilterAdminPipe } from './pipe/filter-admin.pipe';
     ConfirmarComponent,
     ConfirmarConMensajeComponent,
     ConfirmarConMensajeDiagnosticoComponent,
-    DiagnosticoComponent,
     MostrarInformacionDeTurnoComponent,
     FormatoEspecialidadesPipe,
     EncuestaPacienteComponent,
     VerHistoriaClinicaComponent,
     ListadoHistoriaClinicaComponent,
-    FilterAdminPipe
+    FilterAdminPipe,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +124,8 @@ import { FilterAdminPipe } from './pipe/filter-admin.pipe';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ChartsModule
   ],
   providers: [
     FirebaseService,

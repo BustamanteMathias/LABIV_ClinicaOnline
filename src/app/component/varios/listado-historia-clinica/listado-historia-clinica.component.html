@@ -119,14 +119,90 @@
       </div>
     </nav>
 
-    <div *ngIf="this.verFolder == true">
-      <span *ngFor="let paciente of this.listaAuxFiltro">
-        <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
-          title="VER HISTORIAS CLÍNICAS" style="margin-left: 1%;" id="btn" name="btn" (click)="Filtrar(paciente)">
-          <img src={{this.iconoFolder}} style="width: 100px; height: 100px;">
-        </button>
-        <label for="btn">{{paciente.apellido}}, {{paciente.nombre}}</label>
+    <div style="display: flex; justify-content: space-around;" *ngIf="this.verFolder == true">
+
+      <span *ngFor="let item of this.listaAuxFiltro2">
+        <div class="card" style="width: 18rem;">
+          <img src={{item.paciente.foto1}} class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{item.paciente.apellido}}, {{item.paciente.nombre}}</h5>
+            <p class="card-text">Ultimas 3 atenciones, click en MÁS para ver historial clínico.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngIf="item.t.a != false; else itemFalse" class="list-group-item">
+              <div class="row">
+                <div class="col" style="display: flex;">
+                  <img src={{this.imgDentista}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.a.area == 'DENTISTA'">
+                  <img src={{this.imgOculista}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.a.area == 'OCULISTA'">
+                  <img src={{this.imgClinico}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.a.area == 'CLINICO'">
+                  <img src={{this.imgGeneral}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.a.area != 'DENTISTA' && item.t.a.area != 'CLINICO' && item.t.a.area != 'OCULISTA'">
+
+                  <strong> {{item.t.a.area}}</strong>
+                </div>
+                <div class="col">
+                  {{item.t.a.fecha}} {{item.t.a.hora}} HS.
+                </div>
+              </div>
+            </li>
+            <li *ngIf="item.t.b != false; else itemFalse" class="list-group-item">
+              <div class="row">
+                <div class="col" style="display: flex;">
+                  <img src={{this.imgDentista}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.b.area == 'DENTISTA'">
+                  <img src={{this.imgOculista}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.b.area == 'OCULISTA'">
+                  <img src={{this.imgClinico}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.b.area == 'CLINICO'">
+                  <img src={{this.imgGeneral}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.b.area != 'DENTISTA' && item.t.b.area != 'CLINICO' && item.t.b.area != 'OCULISTA'">
+
+                  <strong> {{item.t.b.area}}</strong>
+                </div>
+                <div class="col">
+                  {{item.t.b.fecha}} {{item.t.b.hora}} HS.
+                </div>
+              </div>
+            </li>
+            <li *ngIf="item.t.c != false; else itemFalse" class="list-group-item">
+              <div class="row">
+                <div class="col" style="display: flex;">
+                  <img src={{this.imgDentista}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.c.area == 'DENTISTA'">
+                  <img src={{this.imgOculista}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.c.area == 'OCULISTA'">
+                  <img src={{this.imgClinico}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.c.area == 'CLINICO'">
+                  <img src={{this.imgGeneral}} class="rounded-circle border border-info" width="50" height="50"
+                    *ngIf="item.t.c.area != 'DENTISTA' && item.t.c.area != 'CLINICO' && item.t.c.area != 'OCULISTA'">
+
+                  <strong> {{item.t.c.area}}</strong>
+                </div>
+                <div class="col">
+                  {{item.t.c.fecha}} {{item.t.c.hora}} HS.
+                </div>
+              </div>
+            </li>
+
+            <ng-template #itemFalse>
+              <li class="list-group-item" style="text-align: center;"><strong>N/A</strong><br><br></li>
+            </ng-template>
+
+          </ul>
+          <div class="card-body">
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="VER HISTORIAS CLÍNICAS" id="btn" name="btn" (click)="Filtrar(item.paciente)">MÁS</button>
+            </div>
+
+
+          </div>
+        </div>
       </span>
+
     </div>
     <div *ngIf="this.verFolder == false">
       <div class="modalDialog">

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EstadisticasComponent } from './component/admin/estadisticas/estadisticas.component';
 
 import { Error404Component } from "./component/error404/error404.component";
 import { BienvenidaComponent } from "./page/bienvenida/bienvenida.component";
@@ -23,6 +24,7 @@ const routes: Routes = [
     path: 'profesional',
     loadChildren: () => import ('./modules/lazy-load-profesional/modulo-profesional.module').then(m => m.ModuloProfesionalModule)
   },
+  { path: 'test', component: EstadisticasComponent },
   { path: 'error404', component: Error404Component },
   { path: '**', component: Error404Component },
 ];

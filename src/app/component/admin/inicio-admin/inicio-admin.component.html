@@ -1,17 +1,15 @@
-<div class="row">
+<div class="row" *ngIf="!this.verPopUp">
   <div class="col">
 
     <div style="text-align: center;">
       <br>
       <h2>LISTADO DE PACIENTES</h2>
       <span type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
-        title="DESCARGAR LISTA DE PACIENTES"
-        (click)="ExportExcel('ListadoPacientes.xlsx', 'excel-tabla-pacientes')">
+        title="DESCARGAR LISTA DE PACIENTES" (click)="ExportExcel('ListadoPacientes.xlsx', 'excel-tabla-pacientes')">
         <img src={{this.iconoDescarga}} style="width: 25px; height: 25px; text-align: center;">
       </span>
     </div>
     <br>
-
     <table class="table" id="excel-tabla-pacientes">
       <thead>
         <tr>
@@ -20,6 +18,7 @@
           <th scope="col">Apellido</th>
           <th scope="col">Tipo</th>
           <th scope="col">Estado</th>
+          <th scope="col">Descargar</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +30,12 @@
           <td>{{item.tipo}}</td>
           <td *ngIf="item.estado == 'ALTA'"><span class="badge bg-success">{{item.estado}}</span></td>
           <td *ngIf="item.estado == 'PENDIENTE'"><span class="badge bg-warning">{{item.estado}}</span></td>
+          <td>
+            <span type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="DESCARGAR LISTA DE PROFESIONALES" (click)="VerPouUpPaciente(item)">
+              <img src={{this.iconoExcel}} style="width: 25px; height: 25px; text-align: center;">
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -56,6 +61,7 @@
           <th scope="col">Apellido</th>
           <th scope="col">Tipo</th>
           <th scope="col">Estado</th>
+          <th scope="col">Descargar</th>
         </tr>
       </thead>
       <tbody>
@@ -67,9 +73,60 @@
           <td>{{item.tipo}}</td>
           <td *ngIf="item.estado == 'ALTA'"><span class="badge bg-success">{{item.estado}}</span></td>
           <td *ngIf="item.estado == 'PENDIENTE'"><span class="badge bg-warning">{{item.estado}}</span></td>
+          <td>
+            <span type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="DESCARGAR LISTA DE PROFESIONALES">
+              <img src={{this.iconoPdf}} style="width: 25px; height: 25px; text-align: center;">
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
 
+  </div>
+</div>
+
+<div *ngIf="this.verPopUp">
+  <div style="margin-top: 10%; position: relative;" [@animacionMenu]>
+    <div style="text-align: center;">
+      <h2>INFORMACIÓN DE PACIENTE</h2>
+      <br>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table" id="excel-tabla-filtro">
+          <thead>
+            <tr>
+              <th scope="col">PROFESIONAL</th>
+              <th scope="col">AREA</th>
+              <th scope="col">FECHA/HORA</th>
+              <th scope="col">ESTADO</th>
+              <th scope="col">COMENTARIO PROFESIONAL</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let item of this.listaFiltro;">
+              <td>{{item.profesional.apellido}}, {{item.profesional.nombre}}</td>
+              <td>{{item.turno.area}}</td>
+              <td>{{item.turno.fecha}} {{item.turno.hora}}</td>
+              <td>{{item.turno.estado}}</td>
+              <td>{{item.turno.comentarioProfesional}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 50rem; text-align: center;">
+          <h3>¿Seguro que desea <strong>DESCARGAR</strong> información de paciente?</h3>
+          <div class="card-body">
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
+              <button class="btn btn-danger" type="button" (click)="Confirmar(false)">VOLVER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

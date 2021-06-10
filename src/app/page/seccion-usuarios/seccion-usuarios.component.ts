@@ -10,12 +10,14 @@ import { Observable } from 'rxjs';
 export class SeccionUsuariosComponent implements OnInit {
 
   listaUsuarios: Observable<any[]>;
+  listaTurnos: Observable<any[]>;
 
   listaProfesionalesPendientes:any[]=[];
   listaProfesionalesAlta:any[]=[];
 
   listaProfesionales:any[];
   listaPacientes:any[];
+  listaTotalTurnos:any[];
 
   selectNavBar:string = 'INICIO';
 
@@ -39,6 +41,16 @@ export class SeccionUsuariosComponent implements OnInit {
 
         this.listaProfesionalesPendientes = this.listaProfesionales.filter(profesional => profesional.estado == 'PENDIENTE');
         this.listaProfesionalesAlta = this.listaProfesionales.filter(profesional => profesional.estado == 'ALTA');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.listaTurnos = this.context.list('turnos').valueChanges();
+    this.listaTurnos.subscribe(
+      (response) => {
+        this.listaTotalTurnos = response;
       },
       (error) => {
         console.log(error);

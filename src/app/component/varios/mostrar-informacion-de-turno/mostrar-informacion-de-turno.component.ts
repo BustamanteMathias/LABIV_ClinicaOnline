@@ -1,10 +1,17 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mostrar-informacion-de-turno',
   templateUrl: './mostrar-informacion-de-turno.component.html',
-  styleUrls: ['./mostrar-informacion-de-turno.component.scss'],animations: [
+  styleUrls: ['./mostrar-informacion-de-turno.component.scss'],
+  animations: [
     trigger('animacionMenu', [
       state(
         'void',
@@ -27,19 +34,26 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   ],
 })
 export class MostrarInformacionDeTurnoComponent implements OnInit {
-
-  @Input() Titulo:string = '';
-  @Input() subTitulo:string = '';
+  @Input() Titulo: string = '';
+  @Input() subTitulo: string = '';
   @Output() eOpcion = new EventEmitter<boolean>();
-  @Input() Turno:any;
+  @Input() Turno: any;
 
-  constructor() { }
+  verComponentHistoria: boolean = false;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
-  Confirmar(opcion:boolean){
+  ngOnInit(): void {}
+
+  Confirmar(opcion: boolean) {
     this.eOpcion.emit(opcion);
   }
 
+  VerHistoriaClinica() {
+    this.verComponentHistoria = true;
+  }
+
+  CerrarHistoriaClinica($event){
+    this.verComponentHistoria = $event;
+  }
 }
