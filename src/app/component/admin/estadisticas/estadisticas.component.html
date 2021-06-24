@@ -2,13 +2,35 @@
   <app-sprinner></app-sprinner>
 </ng-container>
 <ng-template #elseTemplate>
-  <div>
-    <nav class="navbar navbar-light bg-light">
-      <form class="container-fluid justify-content-start">
-        <button class="btn btn-outline-success me-2" type="button" (click)="Ir('admin')">VOLVER</button>
-      </form>
-    </nav>
+  <nav class="navbar navbar-light bg-light">
+    <form class="container-fluid justify-content-start">
+      <button class="btn btn-dark" type="button" (click)="Ir('admin')">VOLVER</button>
+      <h1 style="margin-left: 10px;"><strong>ESTADISTICAS</strong></h1>
+    </form>
+    <br><br>
+    <ul class="nav nav-tabs" style="cursor: pointer;">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" (click)="Ver(0)"><strong>GENERAL</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="Ver(1)">Log de Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="Ver(2)">Turnos por día</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="Ver(3)">Turnos por especialidad</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="Ver(4)">Turnos solicitados por medico</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="Ver(5)">Turnos finalizados por medico</a>
+      </li>
+    </ul>
+  </nav>
 
+  <div *ngIf="this.verGeneral">
     <div class="row">
       <div class="col-sm-8">
         <br><br>
@@ -34,5 +56,17 @@
       </div>
     </div>
   </div>
-</ng-template>
 
+  <div *ngIf="!this.verGeneral">
+    <br><br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="button" class="btn btn-danger" (click)="DescargarPDF()">DESCARGAR PDF</button><br><br>
+    </div>
+    <app-log id="canvas1"  *ngIf="this.ver == 1"></app-log>
+    <app-turnos-por-dia id="canvas2" *ngIf="this.ver == 2"></app-turnos-por-dia>
+    <app-turnos-por-especialidad id="canvas3" *ngIf="this.ver == 3"></app-turnos-por-especialidad>
+    <app-turnos-solicitados-por-medico id="canvas4" *ngIf="this.ver == 4"></app-turnos-solicitados-por-medico>
+    <app-turnos-finalizados-por-medico id="canvas5" *ngIf="this.ver == 5"></app-turnos-finalizados-por-medico>
+  </div>
+
+</ng-template>

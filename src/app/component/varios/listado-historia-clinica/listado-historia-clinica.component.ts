@@ -213,7 +213,7 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
       doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
       return doc;
     }).then((docResult) => {
-      docResult.save(`${new Date().toISOString()}_tutorial.pdf`);
+      docResult.save(`${new Date().toISOString()}_hClinica.pdf`);
     });
 
     /**const doc = new jsPDF(); //'p', 'mm', 'a4'
