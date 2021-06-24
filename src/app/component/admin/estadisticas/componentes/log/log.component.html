@@ -1,0 +1,18 @@
+<div>
+  <table class="table table-sm" style="position: relative; width: 100%; height: 50%; overflow-y: scroll;">
+    <thead>
+      <tr>
+        <th scope="col">USUARIO</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of this.listaLog">
+        <td>{{log.email}}</td>
+        <td>{{log.dia}}</td>
+        <td>{{log.hora}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

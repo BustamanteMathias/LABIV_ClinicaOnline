@@ -4,6 +4,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/service/firebase.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-listado-historia-clinica',
@@ -42,6 +44,7 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
   iconoHistoriaClinica: string =
     '../../../../assets/Iconos/historiaClinica.svg';
   iconoFolder: string = '../../../../assets/Iconos/folder.svg';
+  iconoPdf: string = '../../../../assets/Iconos/pdf.svg';
 
   ngOnInit(): void {
     this.listaUsuarios = this.context.list('usuarios').valueChanges();
@@ -62,7 +65,6 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
           refFoto2.getDownloadURL().then((url) => {
             p.foto2 = url;
           });
-
         });
       },
       (error) => {
@@ -169,8 +171,7 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
 
         this.listaAuxFiltro2.push(aux);
       });
-
-      console.log(this.listaAuxFiltro2);
+      console.log(this.listaAux);
     }, 500);
   }
 
@@ -184,12 +185,43 @@ export class ListadoHistoriaClinicaComponent implements OnInit {
   }
 
   Filtrar(paciente: any) {
-    console.log(this.listaAuxTurno);
     this.listaAuxTurno = this.listaAux.filter(
       (elemento) => elemento.paciente.id == paciente.id
     );
-    console.log(this.listaAuxTurno);
     this.verFolder = false;
+  }
+
+  DescargarPDF(turno: any) {
+
+    // Extraemos el
+    const DATA = document.getElementById('htmlData');
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    html2canvas(DATA, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`${new Date().toISOString()}_tutorial.pdf`);
+    });
+
+    /**const doc = new jsPDF(); //'p', 'mm', 'a4'
+    let imgData = '../../../../assets/clinico.png';
+    doc.setFontSize(40);
+    doc.text('Paranyan loves jsPDF', 35, 25);
+    doc.addImage(imgData, 'JPEG', 15, 40, 180, 160);
+    doc.save();*/
   }
 
   Cerrar() {

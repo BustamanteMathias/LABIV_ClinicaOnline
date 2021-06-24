@@ -8,6 +8,7 @@ import { TurnosAdminComponent } from 'src/app/component/admin/turnos-admin/turno
 import { UsuariosAdminComponent } from 'src/app/component/admin/usuarios-admin/usuarios-admin.component';
 import { Error404Component } from 'src/app/component/error404/error404.component';
 import { SeccionUsuariosComponent } from '../../page/seccion-usuarios/seccion-usuarios.component';
+import { EstadisticasComponent } from 'src/app/component/admin/estadisticas/estadisticas.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'usuarios', component: UsuariosAdminComponent},
       { path: 'turnos', component: TurnosAdminComponent},
       { path: 'seccion-usuarios', component: SeccionUsuariosComponent},
+      { path: 'estadisticas', component: EstadisticasComponent},
       { path: '**', component: Error404Component },
     ],
   },

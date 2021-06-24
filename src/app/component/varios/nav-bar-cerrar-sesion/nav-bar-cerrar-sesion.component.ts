@@ -21,4 +21,7 @@ export class NavBarCerrarSesionComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  Ir(path:string){
+    this.router.navigate([path]);
+  }
 }

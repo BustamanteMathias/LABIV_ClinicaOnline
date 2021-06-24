@@ -61,6 +61,11 @@ import { VerHistoriaClinicaComponent } from './component/varios/ver-historia-cli
 import { ListadoHistoriaClinicaComponent } from './component/varios/listado-historia-clinica/listado-historia-clinica.component';
 import { FilterAdminPipe } from './pipe/filter-admin.pipe';
 import { EstadisticasComponent } from './component/admin/estadisticas/estadisticas.component';
+import { LogComponent } from './component/admin/estadisticas/componentes/log/log.component';
+import { TurnosPorEspecialidadComponent } from './component/admin/estadisticas/componentes/turnos-por-especialidad/turnos-por-especialidad.component';
+import { TurnosPorDiaComponent } from './component/admin/estadisticas/componentes/turnos-por-dia/turnos-por-dia.component';
+import { TurnosSolicitadosPorMedicoComponent } from './component/admin/estadisticas/componentes/turnos-solicitados-por-medico/turnos-solicitados-por-medico.component';
+import { TurnosFinalizadosPorMedicoComponent } from './component/admin/estadisticas/componentes/turnos-finalizados-por-medico/turnos-finalizados-por-medico.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +111,12 @@ import { EstadisticasComponent } from './component/admin/estadisticas/estadistic
     VerHistoriaClinicaComponent,
     ListadoHistoriaClinicaComponent,
     FilterAdminPipe,
-    EstadisticasComponent
+    EstadisticasComponent,
+    LogComponent,
+    TurnosPorEspecialidadComponent,
+    TurnosPorDiaComponent,
+    TurnosSolicitadosPorMedicoComponent,
+    TurnosFinalizadosPorMedicoComponent,
   ],
   imports: [
     BrowserModule,

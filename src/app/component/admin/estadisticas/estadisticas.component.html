@@ -1,4 +1,38 @@
-<p>PRUEBA</p>
-<div style="width:80%;">
-  <canvas id="myChart" width="700" height="250" #mychart></canvas>
-</div>
+<ng-container *ngIf="this.spinner; else elseTemplate">
+  <app-sprinner></app-sprinner>
+</ng-container>
+<ng-template #elseTemplate>
+  <div>
+    <nav class="navbar navbar-light bg-light">
+      <form class="container-fluid justify-content-start">
+        <button class="btn btn-outline-success me-2" type="button" (click)="Ir('admin')">VOLVER</button>
+      </form>
+    </nav>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <br><br>
+        <app-turnos-por-dia></app-turnos-por-dia>
+      </div>
+      <div class="col-sm-4">
+        <br><br>
+        <app-log></app-log>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <br><br>
+        <app-turnos-por-especialidad></app-turnos-por-especialidad>
+      </div>
+      <div class="col-sm">
+        <br><br>
+        <app-turnos-solicitados-por-medico></app-turnos-solicitados-por-medico>
+      </div>
+      <div class="col-sm">
+        <br><br>
+        <app-turnos-finalizados-por-medico></app-turnos-finalizados-por-medico>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

@@ -61,6 +61,7 @@ export class FirebaseService {
       this.AFauth.signInWithEmailAndPassword(email, password).then(
         (response) => {
           this.SetTipoUsuario(response.user.uid);
+          this.Insert_Log(response.user.uid, email);
           resolve(response);
         },
         (error: any) => {
@@ -118,6 +119,20 @@ export class FirebaseService {
   Insert_Turno(t: Turno): Promise<void> {
     t.GenerarID();
     return this.context.list('turnos').set(t.id, t);
+  }
+
+  Insert_Log(uid:string, email:any): any {
+    let d = new Date();
+    let key:string = uid + '-' + this.PadLeft(d.getDate(), 2) + '-' + this.PadLeft(d.getMonth() + 1, 2) + '-' + d.getFullYear() + '-' + this.PadLeft(d.getHours(), 2) + ':' + this.PadLeft(d.getMinutes(), 2) + ':' + this.PadLeft(d.getSeconds(), 2);
+    return this.context.list('log').set(key, {
+      email: email,
+      dia: this.PadLeft(d.getDate(), 2) + '/' + this.PadLeft(d.getMonth() + 1, 2) + '/' + d.getFullYear(),
+      hora: this.PadLeft(d.getHours(), 2) + ':' + this.PadLeft(d.getMinutes(), 2) + ':' + this.PadLeft(d.getSeconds(), 2)
+    });
+  }
+
+  PadLeft(value, length) {
+    return (value.toString().length < length) ? this.PadLeft("0" + value, length) : value;
   }
 
   Insert_Usuario(p: any) {
